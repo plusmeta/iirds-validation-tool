@@ -3,8 +3,8 @@ import semver from "semver";
 
 import objectTemplate from "@/store/storage/template";
 
-import schemaValidation from "@/util/validator-schema";
-import containerValidation from "@/util/validator-container";
+import ContainerValidationWorker from "@/workers/container-validation.worker";
+import SchemaValidationWorker from "@/workers/schema-validation.worker";
 import systemValidations from "@/config/imports/system-rules";
 
 import { ConfConst } from "@/config/imports/const";
@@ -29,7 +29,7 @@ export default {
         let detectedVersion = "1.1";
 
         // Container validation based on ruleset
-        const {containerViolations, zipArchive, checkedContainerRules} = await containerValidation.validate(objectData, null, objectFilename);
+        const {containerViolations, zipArchive, checkedContainerRules} = await this.validateContainer(objectData, null, objectFilename);
         if (containerViolations && Array.isArray(containerViolations)) {
             let containerViolationObjectUuids = [];
 
@@ -53,7 +53,7 @@ export default {
 
         if (processable) {
             // Schema validation based on ruleset
-            const {schemaViolations, checkedSchemaRules, iiRDSVersion} = await schemaValidation.validate(zipArchive, null, "metadata.rdf");
+            const {schemaViolations, checkedSchemaRules, iiRDSVersion} = await this.validateSchema(zipArchive, null, "metadata.rdf");
             if (schemaViolations && Array.isArray(schemaViolations)) {
                 let schemaViolationObjectUuids = [];
 
@@ -178,5 +178,27 @@ export default {
         if (level !== "info") this.logs.push(msg);
         // eslint-disable-next-line no-console
         if (VERBOSE) console.log(msg);
+    },
+    validateContainer(objectData, scope, fileName) {
+        return new Promise((resolve, reject) => {
+            const worker = new ContainerValidationWorker;
+            worker.postMessage({ objectData, scope, fileName });
+
+            worker.addEventListener("message", (msg) => {
+                resolve(JSON.parse(msg.data));
+                worker.terminate();
+            });
+        });
+    },
+    validateSchema(zipArchive, scope, fileName) {
+        return new Promise((resolve, reject) => {
+            const worker = new SchemaValidationWorker;
+            worker.postMessage({ zipArchive, scope, fileName });
+
+            worker.addEventListener("message", (msg) => {
+                resolve(JSON.parse(msg.data));
+                worker.terminate();
+            });
+        });
     }
 };

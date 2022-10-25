@@ -3,7 +3,7 @@ const FORBIDDEN_FILES_ROOT_REGEXP = /^[^/\\]+\.([pP][dD][fF]|[jJ][pP][eE]?[gG]|[
 const FORBIDDEN_FILES_META_REGEXP = /^META\-INF\/\w+\.([pP][dD][fF]|[jJ][pP][eE]?[gG]|[gG][iI][fF]|[pP][nN][gG]|[hH][tT][mM][lL]?|[cC][sS][sS]|[iI][iI][rR][dD][sS]|[jJ][sS])$/;
 
 const getFileFromPath = path => path.split(/[/\\]/).pop();
-const Parser = new DOMParser();
+//const Parser = new DOMParser();
 
 export default [{
     id: "C1",
@@ -204,6 +204,7 @@ export default [{
         "de": "File names are case-sensitive and MUST be unique within their parent directories",
         "en": "File names are case-sensitive and MUST be unique within their parent directories"
     }
+    /*
 },
 {
     id: "C16",
@@ -223,4 +224,5 @@ export default [{
         "de": "The META-INF directory MUST contain the file metadata.rdf in RDF 1.1 XML syntax. XML is invalid.",
         "en": "The META-INF directory MUST contain the file metadata.rdf in RDF 1.1 XML syntax. XML is invalid."
     }
+    */
 }];
