@@ -27,7 +27,7 @@
         </v-col>
         <v-col class="py-4" cols="auto">
           <h1>
-            {{ (isValid) ? `Valid iiRDS ${getCurrentProjectRelationById('detectedVersion')}` : 'Not valid' }}
+            {{ (isValid) ? `${$t('Otk.valid')} iiRDS ${getCurrentProjectRelationById('detectedVersion')}` : $t('Otk.notValid') }}
           </h1>
         </v-col>
         <v-col class="py-4 px-8" cols="8">
@@ -36,21 +36,21 @@
             class="my-0"
           >
             <span class="font-weight-bold">{{ getViolations.length }}+</span>
-            violations detected for file
+            {{ $t('Otk.violationsDetected') }}
             <span class="font-weight-bold">{{ getValidationSource }}</span>
-            (show only first {{ getViolations.length }} violations)
+            ({{ $t('Otk.showOnlyViolations', [getViolations.length]) }})
           </p>
           <p
             v-else
             class="my-0"
           >
             <span class="font-weight-bold">{{ getViolations.length }}</span>
-            violations detected for file
+            {{ $t('Otk.violationsDetected') }}
             <span class="font-weight-bold">{{ getValidationSource }}</span>
           </p>
           <p class="my-0">
             <span class="font-weight-bold">{{ getCurrentProjectRelationById('totalRulesChecked') }}</span>
-            rules checked for validation
+            {{ $t('Otk.rulesChecked') }}
           </p>
         </v-col>
         <v-spacer />
