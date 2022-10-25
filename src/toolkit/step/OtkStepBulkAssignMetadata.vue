@@ -31,7 +31,19 @@
           </h1>
         </v-col>
         <v-col class="py-4 px-8" cols="8">
-          <p class="my-0">
+          <p
+            v-if="getCurrentProjectRelationById('maxViolationsExceeded')"
+            class="my-0"
+          >
+            <span class="font-weight-bold">{{ getViolations.length }}+</span>
+            violations detected for file
+            <span class="font-weight-bold">{{ getValidationSource }}</span>
+            (show only first {{ getViolations.length }} violations)
+          </p>
+          <p
+            v-else
+            class="my-0"
+          >
             <span class="font-weight-bold">{{ getViolations.length }}</span>
             violations detected for file
             <span class="font-weight-bold">{{ getValidationSource }}</span>

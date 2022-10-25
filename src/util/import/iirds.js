@@ -10,6 +10,7 @@ import systemValidations from "@/config/imports/system-rules";
 import { ConfConst } from "@/config/imports/const";
 
 const VERBOSE = process.env.NODE_ENV !== "production";
+const MAX_VIOLATIONS = 100;
 
 export default {
     mimeType: {
@@ -75,7 +76,14 @@ export default {
             totalRulesChecked += checkedSchemaRules;
         }
 
-        await this.params.store.dispatch("storage/saveObjectsLocal", this.violationObjects);
+
+        let violationObjects = this.violationObjects;
+        if (violationObjects.length > MAX_VIOLATIONS) {
+            await this.params.store.dispatch("projects/updateCurrentProjectRelations", { maxViolationsExceeded: true });
+            violationObjects = violationObjects.slice(0, MAX_VIOLATIONS);
+        }
+
+        await this.params.store.dispatch("storage/saveObjectsLocal", violationObjects);
 
         await this.params.store.dispatch("projects/updateCurrentProjectRelations", { totalRulesChecked });
         await this.params.store.dispatch("projects/updateCurrentProjectRelations", { detectedVersion });
