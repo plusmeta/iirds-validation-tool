@@ -1,8 +1,6 @@
 import validations from "@/config/imports/schema-rules";
 import { v4 as uuid } from "uuid";
 
-import { DOMParser, XMLSerializer } from "xmldom";
-
 const Serializer = new XMLSerializer();
 const Parser = new DOMParser();
 
