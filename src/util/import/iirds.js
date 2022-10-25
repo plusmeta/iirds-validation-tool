@@ -20,6 +20,7 @@ export default {
         projectUuid: null,
         store: null
     },
+    violationObjects: [],
     logs: [],
     async analyze(projectUuid, objectUuid, objectData, objectFilename, store) {
         this.params = {projectUuid, store};
@@ -74,6 +75,8 @@ export default {
             totalRulesChecked += checkedSchemaRules;
         }
 
+        await this.params.store.dispatch("storage/saveObjectsLocal", this.violationObjects);
+
         await this.params.store.dispatch("projects/updateCurrentProjectRelations", { totalRulesChecked });
         await this.params.store.dispatch("projects/updateCurrentProjectRelations", { detectedVersion });
 
@@ -97,7 +100,7 @@ export default {
         }
         return {version, restriction};
     },
-    async setViolation(objectUuid, test) {
+    setViolation(objectUuid, test) {
         const locale = this.params.store.getters["settings/getCurrentLocale"];
         const violationObject = objectTemplate.object({
             externalId: objectUuid,
@@ -145,7 +148,7 @@ export default {
             }
         });
 
-        await this.params.store.dispatch("storage/saveObjectLocal", violationObject);
+        this.violationObjects.push(violationObject);
         return violationObject.uuid;
     },
     async setValidationResult(objectUuid, version, restriction) {
