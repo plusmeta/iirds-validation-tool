@@ -1,10 +1,17 @@
-export const isBuiltIn = uri => uri.startsWith("http://iirds.tekom.de/iirds");
+const isBuiltIn = uri => uri.startsWith("http://iirds.tekom.de/iirds");
+
+const isExactlyOneChild = (el, selector) => el.querySelectorAll(`:scope > ${selector}`).length === 1;
+
+export const isDirectoryRoot = (el) => {
+    return !["has-next-sibling", "has-first-child", "DirectoryNode"].includes(el.parentElement.localName);
+};
 export const getAbsoluteIRIRegExp = () => new RegExp(/^(\w+:|www\.)[\S]+/);
 
 export const includesAll = (small, big) => small.every(n => big.indexOf(n) !== -1);
-export const oneOrMore = (els, selector) => (els && els.length) ? els.every(el => el.querySelectorAll(`:scope > ${selector}`).length >= 1) : true;
+
+export const isOneOrMore = (els, selector) => (els && els.length) ? els.every(el => el.querySelectorAll(`:scope > ${selector}`).length >= 1) : true;
+
 export const isZeroOrOne = (els, selector) => (els && els.length) ? els.every(el => el.querySelectorAll(`:scope > ${selector}`).length <= 1) : true;
-export const isExactlyOneChild = (el, selector) => el.querySelectorAll(`:scope > ${selector}`).length === 1;
 
 export const isExactlyOne = (els, doc, selector) => (els && els.length) ? els.every((el) => {
     if (el.hasAttribute("rdf:about")) {
@@ -34,6 +41,8 @@ export const getMoreThanOne = (els, doc, selector) => els.filter((el) => {
 }).filter(Boolean);
 
 export const getMissing = (els, selector) => els.filter(el => !el.querySelectorAll(`:scope > ${selector}`).length);
+
+export const getNotIncluded = (small, big) => small.filter(n => big.indexOf(n) === -1);
 
 export const getWrongClassInPackage = (els, doc, className) => els.filter((el) => {
     if (el.hasAttribute("rdf:resource")) {

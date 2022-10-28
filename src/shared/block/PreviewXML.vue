@@ -96,6 +96,11 @@ export default {
             "getMetadataValueByURI",
         ]),
     },
+    created() {
+        const lineText = this.getMetadataValueByURI(this.file.uuid, "plus:Lines");
+        const splitLines = lineText.split("\n");
+        this.mode = splitLines.length === 1;
+    },
     methods: {
         changeMode() {
             this.mode = true;

@@ -11,17 +11,15 @@
 - Icons: [Material Design Icons](https://materialdesignicons.com/)
 - Plattform: [plusmeta](https://help.plusmeta.de/de/Willkommen/)
 
-### iiRDS-Generierung
-
-- Zip: [JSZip](https://stuk.github.io/jszip/)
-- RDF/XML: [xmlbuilder-js](https://github.com/oozcitak/xmlbuilder-js)
-
 ### Backend
 
 - Build: [Vue CLI / Webpack](https://cli.vuejs.org/)
 - Linting: [ESLint](https://eslint.org/)
 - Transpiling: [Babel](https://babeljs.io/)
-- Fehlerreporting: [Sentry (nicht aktiviert)](https://sentry.io/_/open-source/)
+
+### Testing
+
+- Unit Tests: [JUnit](https://junit.org/)
 
 ## Entwicklungsumgebung
 
@@ -36,14 +34,12 @@
 
 Folgende Erweiterungen **sollten** über die Ansicht "File > Preferences > Extensions" innerhalb von VS Code installiert werden:
 
-- _GitLens_
 - _ESLint_
 - _Vetur_
-- _Vue i18n Ally_
+- _i18n Ally_
 
 Folgende Erweiterungen **können** über die Ansicht "File > Preferences > Extensions" innerhalb von VS Code installiert werden:
 
-- _German Language Pack for Visual Studio Code_
 - _Beautify_
 - _vuetify-vscode_
 
@@ -99,10 +95,17 @@ Es gibt mehrere Möglichkeiten, eine lokale Instanz in VS Code zu starten:
 
 - im Arbeitsverezichnis (`./iirds-validation-tool`) den Befehl `npm run-script serve` ausführen.
 
+## Unit-Tests ausführen
+
+Aktuell können die Schema-Validierungsregeln über einen Unit-Test gegen einen Satz von Beispiel-RDFs ausgeführt werden.
+Die Testdateien liegen unter: `/tests/files/util/iirds-validation`
+
+- Den Befehl `npm run test:unit -t "validator-schema"` ausführen
+
 ## Pull Request testen
 
 Es gibt mehrere Möglichkeiten, lokal einen Pull Request (PR) zu testen.
-Fast immer wird der Name des Branches benötigt, der dem PR zugeordnet ist. Dieser wird in Bitbucket in der PR-Ansicht angezeigt.
+Fast immer wird der Name des Branches benötigt, der dem PR zugeordnet ist. 
 
 ### Nur VS Code (über Befehlspalette)
 

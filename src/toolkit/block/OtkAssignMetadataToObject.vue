@@ -30,22 +30,6 @@
       >
         <template v-for="custom in getVisibleMetadata">
           <div
-            v-if="custom.type === 'plus:Class'"
-            :key="custom.value"
-          >
-            <ChooseCreateProperty
-              :key="custom.value"
-              :object-uuid="object.uuid"
-              :propclass="custom.value"
-              :proprelation="custom.rel"
-              :required="custom.required"
-              :multiple="custom.multiple"
-              :indicator="false"
-              :label="true"
-              :icon="custom.icon"
-            />
-          </div>
-          <div
             v-if="custom.type === 'plus:Array'"
             :key="custom.value"
           >
@@ -79,7 +63,6 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
-import ChooseCreateProperty from "@/toolkit/inline/OtkChooseCreateProperty";
 import ChooseManageList from "@/toolkit/inline/OtkChooseManageList";
 import ShowEditMetadata from "@/toolkit/inline/OtkShowEditMetadata";
 import PreviewXML from "@/shared/block/PreviewXML";
@@ -88,7 +71,6 @@ export default {
     name: "PlusAssignMetadataToObject",
     components: {
         PreviewXML,
-        ChooseCreateProperty,
         ChooseManageList,
         ShowEditMetadata
     },

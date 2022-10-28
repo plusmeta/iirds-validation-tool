@@ -13,11 +13,11 @@ describe("validate iiRDS schema", () => {
     const parser = new DOMParser();
     for (let validation of validations) {
         for (let [expectation, filePathList] of Object.entries(validation?.testFiles ?? [])) {
-            for (let [idx, filePath] of filePathList.entries()) {
-                const expectSymbol = expectation.substring(0,1).toUpperCase() + idx;
+            for (let i = 0; i < filePathList.length; i++) {
+                const expectSymbol = expectation.substring(0,1).toUpperCase() + i;
                 const testText = validation.rule.en.substring(0, 70) + "...";
                 it(`[${validation.id}][${expectSymbol}] ${testText}`, () => {
-                    const xmlContent = readFileSync(filePath, "utf8");
+                    const xmlContent = readFileSync(filePathList[i], "utf8");
                     const rdfDoc = parser.parseFromString(xmlContent, "application/xml");
                     const { succeeded, invalidElements } = validateSingleRule(rdfDoc, validation);
 

@@ -53,9 +53,7 @@ module.exports = {
     },
     transpileDependencies: [
         "vuetify",
-        "vuex-persist",
-        "pdfjs-dist",
-        "xmlbuilder"
+        "vuex-persist"
     ],
     productionSourceMap: false,
     css: {

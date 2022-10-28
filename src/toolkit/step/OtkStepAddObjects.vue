@@ -239,14 +239,6 @@
             <span :class="{'grey--text': processing.includes(item.uuid)}">{{ item.name }}</span>
           </template>
 
-          <template v-slot:item.size="{ item }">
-            <ByteUnit :value="item.size" :class="{'grey--text': processing.includes(item.uuid)}" />
-          </template>
-
-          <template v-slot:item.actions="{ item }">
-            <DeleteObject :uuid="item.uuid" />
-          </template>
-
           <template v-slot:no-data>
             <v-container
               fluid
@@ -280,7 +272,6 @@ import { mapGetters, mapActions } from "vuex";
 import { tap, debounceTime } from "rxjs/operators";
 
 import QuickView from "@/shared/inline/QuickView";
-import DeleteObject from "@/shared/inline/DeleteObject";
 
 import template from "@/store/storage/template";
 import util from "@/util";
@@ -288,18 +279,11 @@ import match from "@/util/match";
 import config from "@/config";
 
 import iirds from "@/util/import/iirds";
-import pdf from "@/util/import/pdf";
-import html from "@/util/import/html";
-import xml from "@/util/import/xml";
-import zip from "@/util/import/zip";
-import ByteUnit from "@/shared/inline/ByteUnit";
 
 export default {
     name: "OtkStepAddObjects",
     components: {
-        ByteUnit,
-        QuickView,
-        DeleteObject
+        QuickView
     },
     data() {
         return {
@@ -384,19 +368,6 @@ export default {
                     align: "left",
                     value: "sourcetype",
                     sortable: true
-                },
-                {
-                    text: this.$t("Objects.filesize"),
-                    align: "left",
-                    value: "size",
-                    sortable: true
-                },
-                {
-                    text: this.$t("Common.actions"),
-                    value: "actions",
-                    align: "right",
-                    disabled: true,
-                    sortable: false
                 }
             ];
         },

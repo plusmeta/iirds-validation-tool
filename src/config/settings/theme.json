@@ -7,7 +7,7 @@
         },
         "themes": {
             "dark": {
-                "primary": "#dec88e",
+                "primary": "#00769f",
                 "secondary": "#636363",
                 "accent": "#5cc5f2",
                 "error": "#FF5252",

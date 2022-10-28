@@ -5,8 +5,6 @@
     "ui_assign_filter": null,
     "ui_addobjects_columns": [
         "name",
-        "sourcetype",
-        "size",
-        "actions"
+        "sourcetype"
     ]
 }

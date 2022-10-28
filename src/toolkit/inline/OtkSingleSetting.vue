@@ -40,13 +40,12 @@
           <v-btn
             :href="String(value)"
             target="_blank"
-            class="ml-6 mb-4"
+            class="ml-6 mb-4 elevation-0"
             color="primary"
             :disabled="!value"
-            outlined
           >
             <v-icon left>
-              mdi-bookmark-outline
+              mdi-bookmark
             </v-icon>
             {{ getLabel }}
           </v-btn>

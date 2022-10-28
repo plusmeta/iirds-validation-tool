@@ -9,7 +9,6 @@ import VueRouter from "vue-router";
 
 import Main from "@/layout/Main";
 import StepLoading from "@/shared/step/StepLoading";
-import StepThankYou from "@/toolkit/step/OtkStepThankYou";
 
 import staticRoutes from "@/router/static";
 
@@ -39,11 +38,6 @@ const router = new VueRouter({
                     name: "OtkWorkflowStep"
                 }
             ]
-        },
-        {
-            path: "/thankyou",
-            component: StepThankYou,
-            name: "OtkThankYou"
         },
         // 404: user is logged in
         {

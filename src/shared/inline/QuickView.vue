@@ -52,26 +52,7 @@
             </v-list-item>
           </v-list>
           <v-card-text
-            v-if="sourceType === 'text/html'"
-            class="pa-0"
-            style="zoom: 0.7"
-          >
-            <PreviewHTML :file="getObject" />
-          </v-card-text>
-          <v-card-text
-            v-else-if="sourceType === 'application/pdf'"
-            class="pa-0"
-          >
-            <PreviewPDF :file="getObject" />
-          </v-card-text>
-          <v-card-text
-            v-else-if="sourceType === 'application/xml'"
-            class="pa-0"
-          >
-            <PreviewXML :file="getObject" />
-          </v-card-text>
-          <v-card-text
-            v-else-if="objectType === 'plus:Text'"
+            v-if="sourceType === 'application/xml'"
             class="pa-0"
           >
             <PreviewXML :file="getObject" />
@@ -86,16 +67,11 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
-import PreviewText from "@/shared/block/PreviewText";
-import PreviewPDF from "@/shared/block/PreviewPDF";
-import PreviewHTML from "@/shared/block/PreviewHTML";
 import PreviewXML from "@/shared/block/PreviewXML";
 
 export default {
     name: "QuickView",
     components: {
-        PreviewPDF,
-        PreviewHTML,
         PreviewXML
     },
     props: {

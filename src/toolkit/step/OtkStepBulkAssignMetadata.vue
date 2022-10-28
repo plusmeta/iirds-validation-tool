@@ -19,7 +19,7 @@
         <v-col class="py-4 pl-12" cols="1">
           <v-icon
             left
-            x-large
+            :size="64"
             color="white"
           >
             {{ (isValid) ? 'mdi-check-circle' : 'mdi-close-circle' }}
@@ -55,7 +55,11 @@
           </p>
         </v-col>
         <v-spacer />
-        <v-col class="py-4 pr-12" cols="1">
+        <v-col
+          cols="1"
+          class="py-4 pr-12"
+          style="text-align: right"
+        >
           <v-btn
             icon
             color="white"
@@ -92,14 +96,13 @@
             >
               <v-autocomplete
                 ref="type"
-                :value="getSetting('ui_assign_filter')"
+                v-model="filter"
                 :items="getObjectTypeFilterValues"
                 :label="$t('Validate.all')"
                 prepend-icon="mdi-filter"
                 single-line
                 hide-details
                 clearable
-                @change="setLocalSetting({key: 'ui_assign_filter', value: $event})"
               >
                 <template v-slot:item="{ item }">
                   <span>{{ item.text }} </span>
@@ -268,6 +271,7 @@ export default {
         return {
             search: null,
             removing: "",
+            filter: null,
             showSettingsMenu: false
         };
     },
@@ -287,10 +291,9 @@ export default {
             }
         },
         getCurrentObjects() {
-            let filter = this.getSetting("ui_assign_filter");
             return this.getCurrentObjectsByType(this.objecttype).filter((object) => {
                 const ruleNr = this.getMetadataValueByURI(object.uuid, "plus:Rule");
-                return (filter) ? ruleNr === filter : true;
+                return (this.filter) ? ruleNr === this.filter : true;
             });
         },
         getObjectTypeFilterValues() {
@@ -356,7 +359,7 @@ export default {
         },
         startFromStart() {
             this.setCurrentProgressLocal(1);
-            this.resetSettings(true);
+            this.clearStorage();
             this.$router.push("/");
         },
         ...mapActions("projects", [
@@ -365,11 +368,11 @@ export default {
             "deleteObjectsFromProject"
         ]),
         ...mapActions("settings", [
-            "setLocalSetting",
-            "resetSettings"
+            "setLocalSetting"
         ]),
         ...mapActions("storage", [
-            "saveMetaDatum"
+            "saveMetaDatum",
+            "clearStorage"
         ])
     }
 };

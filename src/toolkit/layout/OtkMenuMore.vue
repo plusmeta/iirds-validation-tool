@@ -6,16 +6,6 @@
 
 <template>
   <div>
-    <form ref="menuForm">
-      <input
-        ref="menuInput"
-        style="display:none;"
-        type="file"
-        accept=".rdf, application/rdf+xml"
-        @change="uploadMetadata($refs.menuInput.files)"
-      >
-    </form>
-
     <v-menu
       eager
       offset-y
@@ -92,21 +82,6 @@
         <v-list-item
           class="py-2"
           :disabled="isInternetExplorer"
-          @click="$refs.menuInput.click()"
-        >
-          <v-list-item-action>
-            <v-icon>
-              mdi-tag-multiple
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>
-            {{ $t("Actions.uploadMetadata") }}
-          </v-list-item-title>
-        </v-list-item>
-
-        <v-list-item
-          class="py-2"
-          :disabled="isInternetExplorer"
           @click="restoreSettings"
         >
           <v-list-item-action>
@@ -175,7 +150,6 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
-import meta from "@/util/import/meta";
 import util from "@/util";
 
 import LicenseInfoDialog from "@/shared/dialog/LicenseInfoDialog";
@@ -216,16 +190,6 @@ export default {
                 if (this.$matomo) this.$matomo.forgetConsentGiven();
                 this.resetSettings(true);
                 this.$notify.send(this.$t("Otk.settingsRestored"), "success", 2);
-            }
-        },
-        async uploadMetadata(uploadedFile) {
-            try {
-                await meta.analyze(uploadedFile[0], this.$store);
-                this.$notify.send(this.$t("Notification.importedMetadata"), "success", 5);
-            } catch (error) {
-                this.$notify.send(this.$t("Notification.importFailed"), "error", 5);
-            } finally {
-                this.$refs.menuForm.reset();
             }
         },
         ...mapActions("settings", [
