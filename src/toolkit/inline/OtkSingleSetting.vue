@@ -36,20 +36,25 @@
         </v-text-field>
       </v-col>
       <v-col v-else-if="getType === 'plus:Hyperlink'">
-        <span class="d-inline-block subtitle-2">
-          <v-btn
-            :href="String(value)"
-            target="_blank"
-            class="ml-6 mb-4 elevation-0"
-            color="primary"
-            :disabled="!value"
-          >
-            <v-icon left>
-              mdi-bookmark
-            </v-icon>
-            {{ getLabel }}
-          </v-btn>
-        </span>
+        <v-row>
+          <v-col cols="auto">
+            <span />
+          </v-col>
+          <v-col>
+            <v-btn
+              :href="String(value)"
+              target="_blank"
+              class="elevation-0"
+              color="primary"
+              :disabled="!value"
+            >
+              <v-icon left>
+                mdi-bookmark
+              </v-icon>
+              {{ getLabel }}
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-col>
       <v-col v-else-if="getType === 'plus:Number'">
         <v-text-field
@@ -153,12 +158,3 @@ export default {
     }
 };
 </script>
-
-  <style>
-    span.pm-metadata-label {
-    color: grey;
-    }
-    span.pm-metadata-label:hover {
-    color: white;
-    }
-  </style>

@@ -11,7 +11,7 @@
     @keydown.esc="cancel"
   >
     <v-card>
-      <v-card-title class="title">
+      <v-card-title class="text-h6">
         {{ title }}
         <v-spacer />
       </v-card-title>

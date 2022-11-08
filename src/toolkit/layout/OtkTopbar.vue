@@ -21,7 +21,7 @@
         class="ml-6 mr-4 mt-2"
       >
     </v-toolbar-title>
-    <v-toolbar-title class="overline" style="font-size:20px !important">
+    <v-toolbar-title class="text-overline">
       Validation Tool
     </v-toolbar-title>
 
@@ -49,15 +49,6 @@ export default {
         };
     },
     computed: {
-        getStepKey() {
-            const workflowRoutes = ["OtkWorkflowView", "OtkWorkflowStep"];
-            if (workflowRoutes.includes(this.$route.name) &&
-                this.getCurrentWorkflowStep.helpkey) {
-                return this.getCurrentWorkflowStep.helpkey;
-            } else {
-                return null;
-            }
-        },
         ...mapGetters("settings", [
             "getLogoForTheme",
             "getSetting"
@@ -67,7 +58,7 @@ export default {
         ])
     },
     methods: {
-        toggleShortcuts($event) {
+        toggleShortcuts() {
             if (!this.initital && !this.getSetting("ui_shortcuts")) {
                 this.initital = true;
                 this.setLocalSetting({ key: "ui_shortcuts", value: true });

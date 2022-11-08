@@ -6,8 +6,7 @@
 <template>
   <v-container
     fluid
-    fill-height
-    class="pa-6 skeleton-container"
+    class="pa-6 skeleton-container fill-height"
   >
     <v-sheet
       class="notfound py-12"
@@ -18,7 +17,7 @@
         alt="404"
         style="max-height: 400px"
       >
-      <div class="my-6 headline" style="font-size: 36px !important; font-weight: 100">
+      <div class="my-6 text-h5" style="font-size: 36px !important; font-weight: 100">
         {{ $t("App.siteNotFound") }}
       </div>
       <p class="my-6 font-monospace">

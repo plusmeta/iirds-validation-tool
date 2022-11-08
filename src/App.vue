@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import util from "@/util";
 
 import { map, scan } from "rxjs/operators";
@@ -101,7 +100,7 @@ export default {
             this.$i18n.setLocaleMessage(locale, messages);
             this.$i18n.locale = locale;
             this.$vuetify.lang.current = locale;
-            this.$auth.changeLocale(locale);
+            await this.$auth.changeLocale(locale);
             document.querySelector("html").setAttribute("lang", locale);
         },
         async getMessageFile(locale) {

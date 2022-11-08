@@ -12,7 +12,7 @@
     :outlined="!$vuetify.theme.dark"
   >
     <v-card-title primary-title>
-      <span class="title">
+      <span class="text-h6">
         {{ helpTitle }}
       </span>
       <v-spacer />
@@ -23,7 +23,7 @@
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-card-title>
-    <v-card-text class="subtitle-2">
+    <v-card-text class="text-subtitle-2">
       <div v-html="helpText" />
     </v-card-text>
   </v-card>

@@ -54,21 +54,6 @@ export default {
                 return this.setCurrentProgressLocal(value);
             }
         },
-        getLastValidStep() {
-            for (let progress = 0; progress <= this.getCurrentProgress - 1 ; progress++) {
-                const step = this.getCurrentWorkflow?.steps[progress];
-                const rules = step?.rules || [];
-
-                const arePreviousRulesValid = rules.every((rule) => {
-                    return rule(this.$store);
-                });
-
-                if (!arePreviousRulesValid) {
-                    return progress + 1;
-                }
-            }
-            return this.getCurrentProgress || 0;
-        },
         getSteps() {
             let workflow = this.getCurrentWorkflow;
             return (workflow) ? [...workflow.steps] : [];
@@ -90,10 +75,10 @@ export default {
         ])
     },
     watch: {
-        currentProgress: async function (to, from) {
+        currentProgress: async function (to) {
             await this.setCurrentStep(to);
         },
-        "$route.name": async function (to) {
+        "$route.name": async function () {
             await this.setCurrentStep(this.getCurrentProgress);
         }
     },
@@ -110,9 +95,6 @@ export default {
                 }
             }
             return this.getCurrentProgress;
-        },
-        isEditable(step) {
-            return !!this.getWorkflowById(this.getCurrentWorkflowId).steps[step].editable;
         },
         async setCurrentStep(to) {
             let index = (to) ? to - 1 : 0;

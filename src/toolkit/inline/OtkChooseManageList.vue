@@ -4,8 +4,8 @@
 -->
 
 <template>
-  <v-layout>
-    <v-flex>
+  <v-row>
+    <v-col>
       <v-combobox
         :value="getAssignedListEntries"
         :items="getAssignedListEntries"
@@ -27,14 +27,12 @@
           </v-list-item>
         </template>
       </v-combobox>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-
-import template from "@/store/properties/template";
 
 export default {
     name: "ChooseManageList",
@@ -102,7 +100,7 @@ export default {
             });
             this.$emit("change");
         },
-        checkRequired(value) {
+        checkRequired() {
             if (this.required && !this.getValueCount) {
                 return this.$t("Common.noEmptyInput");
             } else {

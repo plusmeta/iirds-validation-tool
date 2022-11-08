@@ -6,11 +6,10 @@
 <template>
   <v-dialog
     :value="true"
-    max-width="50vw"
     @click:outside="$emit('close')"
   >
     <v-card>
-      <v-card-title class="title">
+      <v-card-title class="text-h6">
         {{ $t('App.licenses') }}
       </v-card-title>
       <v-card-text class="pa-2">

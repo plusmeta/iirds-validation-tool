@@ -5,63 +5,62 @@
 -->
 
 <template>
-  <v-container fluid>
+  <v-container>
     <v-card
-      class="mb-6 elevation-4"
-      min-height="125"
+      class="elevation-4 mb-2"
       :color="(isValid) ? 'success' : 'error'"
     >
-      <v-row
-        align="center"
-        style="height:125px"
-        class="white--text"
-      >
-        <v-col class="py-4 pl-12" cols="1">
-          <v-icon
-            left
-            :size="64"
-            color="white"
-          >
-            {{ (isValid) ? 'mdi-check-circle' : 'mdi-close-circle' }}
-          </v-icon>
-        </v-col>
-        <v-col class="py-4" cols="2">
-          <h2>
-            {{ (isValid) ? `${$t('Otk.valid')} iiRDS ${getCurrentProjectRelationById('detectedVersion')}` : $t('Otk.notValid') }}
-          </h2>
-        </v-col>
-        <v-col class="py-4 px-8" cols="7">
-          <p class="my-0">
-            <span class="font-weight-bold">{{ $tc('Otk.violationsDetected', getViolationTypes) }}</span>
-            <span class="font-monospace">&nbsp;{{ getValidationSource }}</span>
-          </p>
-
-          <p class="my-0">
-            <span class="font-weight-bold">{{ getViolations.length }}</span>
-            <span v-if="getViolations.length > 99" class="font-weight-bold">+</span>
-            <span class="font-weight-bold">&nbsp;{{ $tc('Otk.violationInstancesDetected', getViolations.length) }}</span>
-            <span>&nbsp;&nbsp;({{ getCurrentProjectRelationById('totalRulesChecked') }}</span>
-            <span>&nbsp;{{ $t('Otk.rulesChecked') }})</span>
-          </p>
-        </v-col>
-        <v-spacer />
-        <v-col
-          cols="2"
-          class="py-4 pr-12"
-          style="text-align: right"
+      <v-card-text>
+        <v-row
+          class="white--text" justify="center"
+          align="center"
         >
-          <v-btn
-            color="white"
-            outlined
-            @click="startFromStart()"
-          >
-            <v-icon left>
-              mdi-restore
+          <v-col cols="auto">
+            <v-icon
+              class="text-h2"
+              left
+              color="white"
+            >
+              {{ (isValid) ? 'mdi-check-circle' : 'mdi-close-circle' }}
             </v-icon>
-            {{ $t('Otk.checkAgain') }}
-          </v-btn>
-        </v-col>
-      </v-row>
+          </v-col>
+          <v-col cols="auto">
+            <h2>
+              {{ (isValid) ? `${$t('Otk.valid')} iiRDS ${getCurrentProjectRelationById('detectedVersion')}` : $t('Otk.notValid') }}
+            </h2>
+          </v-col>
+          <v-spacer />
+          <v-col cols="auto">
+            <p class="mb-0">
+              <span class="font-weight-bold">{{ $tc('Otk.violationsDetected', getViolationTypes) }}</span>
+              <span class="font-monospace">&nbsp;{{ getValidationSource }}</span>
+            </p>
+
+            <p class="mb-0">
+              <span class="font-weight-bold">{{ getViolations.length }}</span>
+              <span v-if="getViolations.length > 99" class="font-weight-bold">+</span>
+              <span class="font-weight-bold">&nbsp;{{ $tc('Otk.violationInstancesDetected', getViolations.length) }}</span>
+              <span>&nbsp;&nbsp;({{ getCurrentProjectRelationById('totalRulesChecked') }}</span>
+              <span>&nbsp;{{ $t('Otk.rulesChecked') }})</span>
+            </p>
+          </v-col>
+          <v-spacer />
+          <v-col
+            cols="auto"
+          >
+            <v-btn
+              color="white"
+              outlined
+              @click="startFromStart()"
+            >
+              <v-icon left>
+                mdi-restore
+              </v-icon>
+              {{ $t('Otk.checkAgain') }}
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text>
     </v-card>
 
     <v-card v-if="!isValid" :outlined="!$vuetify.theme.dark">
@@ -80,96 +79,105 @@
       >
         <template v-slot:header>
           <v-toolbar :class="{'elevation-0': !$vuetify.theme.dark}">
-            <v-flex
-              v-shortkey.once="['t']"
-              class="pb-2"
-              @shortkey="$refs.type.focus()"
+            <v-row
+              class="px-2"
+              justify="center"
+              align="center"
             >
-              <v-autocomplete
-                ref="type"
-                v-model="filter"
-                :items="getObjectTypeFilterValues"
-                :label="$t('Validate.all')"
-                prepend-icon="mdi-filter"
-                single-line
-                hide-details
-                clearable
-              >
-                <template v-slot:item="{ item }">
-                  <span>{{ item.text }} </span>
-                  <v-spacer />
-                  <v-chip small color="accent">
-                    {{ item.count }}
-                  </v-chip>
-                </template>
-              </v-autocomplete>
-            </v-flex>
-
-            <v-spacer />
-
-            <v-flex
-              v-shortkey.once="['f']"
-              class="pb-2"
-              @shortkey="$refs.search.focus()"
-            >
-              <v-text-field
-                ref="search"
-                v-model="search"
-                prepend-icon="mdi-magnify"
-                :label="$t('Common.search')"
-                single-line
-                hide-details
-                clearable
-              />
-            </v-flex>
-
-            <v-spacer />
-
-            <div
-              v-shortkey.once="['s']"
-              @shortkey="showSettingsMenu = !showSettingsMenu"
-            >
-              <v-menu
-                v-model="showSettingsMenu"
-                left
-                offset-y
-                :min-width="350"
-                :close-on-content-click="false"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    icon
-                    class="mr-1"
-                    v-on="on"
+              <template v-if="$vuetify.breakpoint.mdAndUp">
+                <v-col
+                  v-shortkey.once="['t']"
+                  @shortkey="$refs.type.focus()"
+                >
+                  <v-autocomplete
+                    ref="type"
+                    v-model="filter"
+                    :items="getObjectTypeFilterValues"
+                    :label="$t('Validate.all')"
+                    prepend-icon="mdi-filter"
+                    single-line
+                    hide-details
+                    clearable
+                    full-width
+                    dense
+                    style="min-width: 200px;"
                   >
-                    <v-icon :class="{turn: showSettingsMenu}">
-                      mdi-cog
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <v-list>
-                  <v-subheader>
-                    {{ $t('Common.view') }}
-                    <v-divider />
-                  </v-subheader>
+                    <template v-slot:item="{ item }">
+                      <span>{{ item.text }} </span>
+                      <v-spacer />
+                      <v-chip small color="accent">
+                        {{ item.count }}
+                      </v-chip>
+                    </template>
+                  </v-autocomplete>
+                </v-col>
+                <v-spacer />
+              </template>
+              <v-col
+                v-shortkey.once="['f']"
+                @shortkey="$refs.search.focus()"
+              >
+                <v-text-field
+                  ref="search"
+                  v-model="search"
+                  prepend-icon="mdi-magnify"
+                  :label="$t('Common.search')"
+                  single-line
+                  hide-details
+                  clearable
+                  dense
+                  style="min-width: 200px;"
+                />
+              </v-col>
+              <template v-if="$vuetify.breakpoint.mdAndUp">
+                <v-spacer />
+                <v-col
+                  v-shortkey.once="['s']"
+                  class="d-flex justify-end"
+                  @shortkey="showSettingsMenu = !showSettingsMenu"
+                >
+                  <v-menu
+                    v-model="showSettingsMenu"
+                    left
+                    offset-y
+                    :min-width="350"
+                    :close-on-content-click="false"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-btn
+                        icon
+                        class="mr-1"
+                        v-on="on"
+                      >
+                        <v-icon :class="{turn: showSettingsMenu}">
+                          mdi-cog
+                        </v-icon>
+                      </v-btn>
+                    </template>
+                    <v-list>
+                      <v-subheader>
+                        {{ $t('Common.view') }}
+                        <v-divider />
+                      </v-subheader>
 
-                  <v-list-item>
-                    <v-list-item-action>
-                      <v-switch
-                        :input-value="getSetting('ui_assign_preview')"
-                        flat
-                        color="primary"
-                        @change="setLocalSetting({key: 'ui_assign_preview', value: !!$event})"
-                      />
-                    </v-list-item-action>
-                    <v-list-item-title>{{ $t('Common.preview') }}</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-            </div>
+                      <v-list-item>
+                        <v-list-item-action>
+                          <v-switch
+                            :input-value="getSetting('ui_assign_preview')"
+                            flat
+                            color="primary"
+                            @change="setLocalSetting({key: 'ui_assign_preview', value: !!$event})"
+                          />
+                        </v-list-item-action>
+                        <v-list-item-title>{{ $t('Common.preview') }}</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                </v-col>
+              </template>
+            </v-row>
           </v-toolbar>
         </template>
-
         <template v-slot="{ items, isExpanded, expand }">
           <v-card
             v-for="(item, index) in items"
@@ -190,10 +198,10 @@
                   </v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="subtitle-2">
+                  <v-list-item-title class="text-subtitle-2">
                     {{ item.name }}
                   </v-list-item-title>
-                  <v-list-item-subtitle class="caption">
+                  <v-list-item-subtitle class="text-caption">
                     <span class="font-monospace font-weight-bold">
                       {{ getMetadataValueByURI(item.uuid, "plus:OriginalFileName") }}
                       <span v-if="getType(item.uuid) === 'Schema'">: {{ getMetadataValueByURI(item.uuid, "plus:LineNr") }}</span>
@@ -218,26 +226,33 @@
           <v-divider />
         </template>
       </v-data-iterator>
-      <v-container
-        v-if="getSetting('ui_shortcuts')"
-        class="caption grey--text text-sm-right px-0 pt-6"
-      >
-        <v-icon class="mr-4" color="grey darken-1">
-          mdi-keyboard
-        </v-icon>
-        <span class="d-inline-block mr-2">
-          {{ $t("Common.filter") }}
-        </span>
-        <kbd>t</kbd>
-        <span class="d-inline-block mr-2 ml-8">
-          {{ $t("Common.search") }}
-        </span>
-        <kbd>f</kbd>
-        <span class="d-inline-block mr-2 ml-8">
-          {{ $t("Actions.openSettings") }}
-        </span>
-        <kbd>s</kbd>
-      </v-container>
+
+      <v-card-text>
+        <v-row>
+          <v-col>
+            <v-container
+              v-if="getSetting('ui_shortcuts')"
+              class="text-caption grey--text text-sm-right px-0 pt-6"
+            >
+              <v-icon class="mr-4" color="grey darken-1">
+                mdi-keyboard
+              </v-icon>
+              <span class="d-inline-block mr-2">
+                {{ $t("Common.filter") }}
+              </span>
+              <kbd>t</kbd>
+              <span class="d-inline-block mr-2 ml-8">
+                {{ $t("Common.search") }}
+              </span>
+              <kbd>f</kbd>
+              <span class="d-inline-block mr-2 ml-8">
+                {{ $t("Actions.openSettings") }}
+              </span>
+              <kbd>s</kbd>
+            </v-container>
+          </v-col>
+        </v-row>
+      </v-card-text>
     </v-card>
   </v-container>
 </template>

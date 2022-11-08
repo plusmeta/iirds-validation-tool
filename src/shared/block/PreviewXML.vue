@@ -5,7 +5,7 @@
 -->
 
 <template>
-  <v-flex style="overflow-x: auto;">
+  <v-col style="overflow-x: auto;">
     <v-sheet
       v-if="file.text"
       height="300"
@@ -50,7 +50,7 @@
         </v-btn>
       </v-col>
     </v-row>
-  </v-flex>
+  </v-col>
 </template>
 
 <script>

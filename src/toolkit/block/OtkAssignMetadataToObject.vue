@@ -6,10 +6,10 @@
 
 <template>
   <v-container fluid>
-    <v-layout wrap>
-      <v-flex
-        xs6
-        lg5
+    <v-row>
+      <v-col
+        md="6"
+        sm="12"
         class="px2"
       >
         <PreviewXML
@@ -22,11 +22,12 @@
           boilerplate
           type="image"
           height="300"
-          width="400"
         />
-      </v-flex>
-      <v-flex
-        class="flex-shrink-1 offset-xs1 xs5 lg6"
+      </v-col>
+      <v-col
+        class="flex-shrink-1"
+        md="6"
+        sm="12"
       >
         <template v-for="custom in getVisibleMetadata">
           <div
@@ -55,13 +56,13 @@
             />
           </div>
         </template>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 import ChooseManageList from "@/toolkit/inline/OtkChooseManageList";
 import ShowEditMetadata from "@/toolkit/inline/OtkShowEditMetadata";
@@ -96,8 +97,7 @@ export default {
             return this.objectMetadata
                 .filter((prop) => {
                     const restrictions = this.getPropertyRelationById(prop.identifier, "plus:restricted-to-object-type");
-                    const areRestrictionsOk = !restrictions.length || restrictions.includes(this.object.type);
-                    return areRestrictionsOk;
+                    return !restrictions.length || restrictions.includes(this.object.type);
                 })
                 .map((prop) => {
                     const relation = this.getPropertyRelationById(prop.identifier, "plus:has-relations")[0] || prop.identifier;
@@ -114,15 +114,7 @@ export default {
                         icon: (icon) ? icon.replace(":", "-") : undefined
                     };
                 })
-                .sort((a,b) => (a.required) ? -1 : 1); // Pflichtmetadaten vorne sortieren
-        },
-        getObjectTypes() {
-            return ["plus:Document", "plus:Component", "plus:Fragment"].map((type) => {
-                return {
-                    text: this.getPropertyLabelById(type),
-                    value: type
-                };
-            });
+                .sort(a => (a.required) ? -1 : 1); // Pflichtmetadaten vorne sortieren
         },
         isXML() {
             return this.object?.type === "plus:RuleViolation";
@@ -159,12 +151,6 @@ export default {
                 }
             });
         },
-        setObjectType(type) {
-            this.saveObjectLocal({
-                uuid: this.object.uuid,
-                type: type
-            });
-        },
         checkDependencyValue(dependentRelation, dependentValue) {
             return dependentRelation.some((rel) => {
                 let assigned = this.getMetadataValueByURI(this.object.uuid, rel);
@@ -182,7 +168,6 @@ export default {
         },
         ...mapActions("storage", [
             "addMetadata",
-            "updateMetadata",
             "saveMetaDatum",
             "saveObjectLocal"
         ])

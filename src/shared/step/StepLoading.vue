@@ -6,8 +6,7 @@
 <template>
   <v-container
     fluid
-    fill-height
-    class="pa-6 skeleton-container"
+    class="pa-6 skeleton-container fill-height"
   >
     <!-- show skeleton as placeholder while loading -->
     <v-skeleton-loader type="image" />

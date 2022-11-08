@@ -38,7 +38,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="overline">
+            <v-list-item-title class="text-overline">
               Validation Tool {{ version }}
             </v-list-item-title>
           </v-list-item-content>

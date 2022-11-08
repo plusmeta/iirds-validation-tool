@@ -6,7 +6,7 @@ module.exports = {
     },
     "extends": [
         "plugin:vue/recommended",
-        "plugin:vuetify/base",
+        "plugin:vuetify/recommended",
         "plugin:@intlify/vue-i18n/recommended"
     ],
     "parserOptions": {

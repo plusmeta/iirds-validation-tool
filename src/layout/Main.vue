@@ -67,7 +67,6 @@ export default {
             "initWorkflowsLocal"
         ]),
         ...mapActions("projects", [
-            "initProjects",
             "startNewProjectLocal"
         ]),
         ...mapActions("properties", [

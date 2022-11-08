@@ -37,14 +37,14 @@
                 </v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title class="subtitle-2">
+                <v-list-item-title class="text-subtitle-2">
                   <span class="d-inline-block text-truncate" style="max-width: 300px;">
                     {{ sourceName || getPropertyLabelById(objectType) }}
                   </span>
                 </v-list-item-title>
                 <v-list-item-subtitle
                   v-if="sourceType"
-                  class="overline grey--text"
+                  class="text-overline grey--text"
                 >
                   {{ $t("Common.preview") }} {{ getPropertyLabelById(sourceType) }}
                 </v-list-item-subtitle>
