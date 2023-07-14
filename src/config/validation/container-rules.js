@@ -114,7 +114,8 @@ export default [{
     assert: async (zip) => {
         const metadataFile = zip.files["META-INF/metadata.rdf"];
         if (metadataFile) {
-            const metadataFileContent = await zip.files["META-INF/metadata.rdf"].async("string");
+            const metadataFileBuffer = await zip.files["META-INF/metadata.rdf"].async("arraybuffer");
+            const metadataFileContent = new TextDecoder("utf-8", {ignoreBOM: false}).decode(metadataFileBuffer);
             return metadataFileContent && /<rdf:RDF/.test(metadataFileContent);
         } else return false;
     },
@@ -210,7 +211,8 @@ export default [{
     assert: async (zip) => {
         const metadataFile = zip.files["META-INF/metadata.rdf"];
         if (metadataFile) {
-            const metadataFileContent = await zip.files["META-INF/metadata.rdf"].async("string");
+            const metadataFileBuffer = await zip.files["META-INF/metadata.rdf"].async("arraybuffer");
+            const metadataFileContent = new TextDecoder("utf-8", {ignoreBOM: false}).decode(metadataFileBuffer);
             const metadataFileDocument = Parser.parseFromString(metadataFileContent, "application/xml");
             return metadataFileDocument.firstElementChild.localName === "RDF";
         } else return false;

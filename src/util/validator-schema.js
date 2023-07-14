@@ -14,7 +14,8 @@ const type = "Schema";
 export default {
     async validate(zipArchive, prio, fileName) {
         const schemaViolations = [];
-        const documentString = await zipArchive.files["META-INF/metadata.rdf"].async("string");
+        const documentBuffer = await zipArchive.files["META-INF/metadata.rdf"].async("arraybuffer");
+        const documentString = new TextDecoder("utf-8", {ignoreBOM: false}).decode(documentBuffer);
         const { processedString, lineMap, lineArr } = this.preprocessDocumentString(documentString);
         const document = Parser.parseFromString(processedString, documentMimeType);
         const iiRDSVersion = document.querySelector("iiRDSVersion")?.textContent;
