@@ -31,7 +31,7 @@ export default [{
     id: "C3",
     assert: (zip, file) => file.name && /\.iirds$/.test(file.name),
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=The%20file%20name%20of%20the%20iiRDS%20ZIP%20archive%20MUST%20feature%20the%20file%20name%20extension%20.iirds.",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=The%20file%20name%20of%20the%20iiRDS%20ZIP%20archive%20MUST%20feature%20the%20file%20name%20extension%20.iirds.",
     break: false,
     rule: {
         "de": "Der Dateiname des iiRDS-ZIP-Archivs MUSS die Dateinamenerweiterung .iirds aufweisen.",
@@ -43,7 +43,7 @@ export default [{
     assert: zip => zip.files["mimetype"],
     getInvalid: zip => ["mimetype"],
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=In%20addition%20to%20the%20iiRDS%20container%20specifications%2C%20the%20root%20directory%20of%20the%20ZIP%20file%20MUST%20contain%20a%20file%20named%20mimetype.",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=In%20addition%20to%20the%20iiRDS%20container%20specifications%2C%20the%20root%20directory%20of%20the%20ZIP%20file%20MUST%20contain%20a%20file%20named%20mimetype.",
     break: false,
     rule: {
         "de": "Das Stammverzeichnis der ZIP-Datei MUSS eine Datei namens mimetype enthalten.",
@@ -61,7 +61,7 @@ export default [{
     },
     getInvalid: zip => ["mimetype"],
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=It%20MUST%20contain,application/iirds%2Bzip",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=It%20MUST%20contain,application/iirds%2Bzip",
     break: false,
     rule: {
         "de": "Die Mimetype-Datei MUSS den folgenden ASCII-codierten Text in einer einzigen Zeile enthalten, ohne Zeilentrennzeichen wie CR oder LF: application/iirds zip.",
@@ -78,7 +78,7 @@ export default [{
     },
     getInvalid: zip => ["mimetype"],
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=The%20file%20MUST%20be%20the%20first%20entry%20in%20the%20ZIP%20file%20and%20it%20MUST%20be%20stored%20uncompressed%20(%22Stored%22%20mode).",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=The%20file%20MUST%20be%20the%20first%20entry%20in%20the%20ZIP%20file%20and%20it%20MUST%20be%20stored%20uncompressed%20(%22Stored%22%20mode).",
     break: false,
     rule: {
         "de": "Die Mimetype-Datei MUSS unkomprimiert gespeichert werden ('Stored'-Modus).",
@@ -90,7 +90,7 @@ export default [{
     assert: zip => Object.keys(zip.files).some(file => /^META\-INF\//.test(file)),
     getInvalid: zip => ["META-INF/"],
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=An%20iiRDS%20container%20MUST%20have%20a%20directory%20META%2DINF.",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=An%20iiRDS%20container%20MUST%20have%20a%20directory%20META%2DINF.",
     break: true,
     rule: {
         "de": "Ein iiRDS-Container MUSS ein Verzeichnis META-INF haben.",
@@ -102,7 +102,7 @@ export default [{
     assert: zip => zip.files["META-INF/metadata.rdf"],
     getInvalid: zip => ["META-INF/metadata.rdf"],
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=The%20META%2DINF%20directory%20MUST%20contain%20the%20file%20metadata.rdf%20containing%20all%20metadata%20in%20RDF%201.1%20XML%20syntax%20(see%20%5Brdf%2Dsyntax%2Dgrammar%5D).",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=The%20META%2DINF%20directory%20MUST%20contain%20the%20file%20metadata.rdf%20containing%20all%20metadata%20in%20RDF%201.1%20XML%20syntax%20(see%20%5Brdf%2Dsyntax%2Dgrammar%5D).",
     break: true,
     rule: {
         "de": "Das META-INF-Verzeichnis MUSS die Datei metadata.rdf enthalten.",
@@ -121,7 +121,7 @@ export default [{
     },
     getInvalid: zip => ["META-INF/metadata.rdf"],
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=The%20META%2DINF%20directory%20MUST%20contain%20the%20file%20metadata.rdf%20containing%20all%20metadata%20in%20RDF%201.1%20XML%20syntax%20(see%20%5Brdf%2Dsyntax%2Dgrammar%5D).",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=The%20META%2DINF%20directory%20MUST%20contain%20the%20file%20metadata.rdf%20containing%20all%20metadata%20in%20RDF%201.1%20XML%20syntax%20(see%20%5Brdf%2Dsyntax%2Dgrammar%5D).",
     break: true,
     rule: {
         "de": "Das META-INF-Verzeichnis MUSS die Datei metadata.rdf enthalten.",
@@ -133,7 +133,7 @@ export default [{
     assert: zip => !Object.keys(zip.files).some(file => FORBIDDEN_CHARS_REGEXP.test(file)),
     getInvalid: zip => Object.keys(zip.files).filter(file => FORBIDDEN_CHARS_REGEXP.test(file)),
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=For%20file%20and,use%20Unicode%20areas",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=For%20file%20and,use%20Unicode%20areas",
     break: true,
     rule: {
         "de": "Für Datei- und Verzeichnisnamen DÜRFEN alle Unicode-Zeichen verwendet werden, mit Ausnahme der folgenden Zeichen: /“,*:<>\\, das DEL-Zeichen (U 007F), Zeichen aus den Bereichen U 0000 bis U 001F und U  0080 bis U 009F, Zeichen aus dem privat genutzten Unicode-Bereich.",
@@ -145,7 +145,7 @@ export default [{
     assert: zip => !Object.keys(zip.files).some(file => FORBIDDEN_FILES_ROOT_REGEXP.test(file)),
     getInvalid: zip => Object.keys(zip.files).filter(file => FORBIDDEN_FILES_ROOT_REGEXP.test(file)),
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=All%20other%20files%20(content%2C%20like%20PDF%2C%20HTML%2C%20media%2C%20Javascript%2C%20CSS%2C%20nested%20iiRDS%20packages)%20MUST%20be%20stored%20in%20arbitrary%20subdirectories%20below%20the%20root%20directory.",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=All%20other%20files%20(content%2C%20like%20PDF%2C%20HTML%2C%20media%2C%20Javascript%2C%20CSS%2C%20nested%20iiRDS%20packages)%20MUST%20be%20stored%20in%20arbitrary%20subdirectories%20below%20the%20root%20directory.",
     break: false,
     rule: {
         "de": "Alle anderen Dateien (Inhalte wie PDF, HTML, Medien, Javascript, CSS, verschachtelte iiRDS-Pakete) MÜSSEN in beliebigen Unterverzeichnissen unterhalb des Stammverzeichnisses gespeichert werden.",
@@ -157,7 +157,7 @@ export default [{
     assert: zip => !Object.keys(zip.files).some(file => FORBIDDEN_FILES_META_REGEXP.test(file)),
     getInvalid: zip => Object.keys(zip.files).filter(file => FORBIDDEN_FILES_META_REGEXP.test(file)),
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=Content%20files%20MUST%20NOT%20be%20placed%20in%20the%20root%20directory%20or%20in%20META%2DINF%20directory.",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=Content%20files%20MUST%20NOT%20be%20placed%20in%20the%20root%20directory%20or%20in%20META%2DINF%20directory.",
     break: false,
     rule: {
         "de": "Inhaltsdateien DÜRFEN NICHT im Stammverzeichnis oder im META-INF-Verzeichnis abgelegt werden.",
@@ -169,7 +169,7 @@ export default [{
     assert: zip => !Object.keys(zip.files).some(file => file.length > 260),
     getInvalid: zip => Object.keys(zip.files).filter(file => file.length > 260),
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=Full%20path%20names%20(file%20names%20including%20the%20full%20directory%20path%20from%20the%20root)%20MUST%20NOT%20exceed%20260%20characters).",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=Full%20path%20names%20(file%20names%20including%20the%20full%20directory%20path%20from%20the%20root)%20MUST%20NOT%20exceed%20260%20characters).",
     break: false,
     rule: {
         "de": "Vollständige Pfadnamen (Dateinamen einschließlich des vollständigen Verzeichnispfads vom Stammverzeichnis) DÜRFEN 260 Zeichen NICHT überschreiten).",
@@ -181,7 +181,7 @@ export default [{
     assert: zip => !Object.keys(zip.files).some(file => getFileFromPath(file).length > 255),
     getInvalid: zip => Object.keys(zip.files).filter(file => getFileFromPath(file).length > 255),
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=The%20length%20of%20file%20names%20is%20limited%20to%20255%20characters.",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=The%20length%20of%20file%20names%20is%20limited%20to%20255%20characters.",
     break: false,
     rule: {
         "de": "Die Länge von Dateinamen ist auf 255 Zeichen begrenzt.",
@@ -199,7 +199,7 @@ export default [{
         return caseInsensitive.filter((s => v => s.has(v) || !s.add(v))(new Set));
     },
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=File%20names%20are%20case%2Dsensitive%20and%20MUST%20be%20unique%20within%20their%20parent%20directories. ",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=File%20names%20are%20case%2Dsensitive%20and%20MUST%20be%20unique%20within%20their%20parent%20directories. ",
     break: false,
     rule: {
         "de": "Bei Dateinamen wird zwischen Groß- und Kleinschreibung unterschieden und sie MÜSSEN innerhalb ihrer übergeordneten Verzeichnisse eindeutig sein",
@@ -219,7 +219,7 @@ export default [{
     },
     getInvalid: zip => ["META-INF/metadata.rdf"],
     prio: "MUST",
-    spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#:~:text=The%20META%2DINF%20directory%20MUST%20contain%20the%20file%20metadata.rdf%20containing%20all%20metadata%20in%20RDF%201.1%20XML%20syntax%20(see%20%5Brdf%2Dsyntax%2Dgrammar%5D).",
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=The%20META%2DINF%20directory%20MUST%20contain%20the%20file%20metadata.rdf%20containing%20all%20metadata%20in%20RDF%201.1%20XML%20syntax%20(see%20%5Brdf%2Dsyntax%2Dgrammar%5D).",
     break: true,
     rule: {
         "de": "Das META-INF-Verzeichnis MUSS die Datei metadata.rdf in RDF 1.1 XML-Syntax enthalten.  XML ist ungültig.",
