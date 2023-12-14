@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:iirds="http://iirds.tekom.de/iirds#" xmlns:iirdsMch="http://iirds.tekom.de/iirds/domain/machinery#" xmlns:iirdsSft="http://iirds.tekom.de/iirds/domain/software#" xmlns:plus="https://data.plusmeta.de/metadata#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <!-- *** iiRDS Open Toolkit (v1.1.7) *** -->
+  <!-- *** generated on 23.11.2023, 13:21:07 *** -->
+  <iirds:Package rdf:about="urn:uuid:aafef6e2-926a-46c7-acaa-9635d6f91cab/package">
+    <iirds:title>iiRDS Open Toolkit Export</iirds:title>
+    <iirds:iiRDSVersion>1.1</iirds:iiRDSVersion>
+  </iirds:Package>
+  <iirds:Role rdf:about="urn:uuid:fa900cca-abb9-454c-a19b-7441d04f57af">
+    <rdfs:label>experte</rdfs:label>
+  </iirds:Role>
+  <iirds:Topic rdf:about="topic/first-topic">
+    <iirds:title>Erster Topic</iirds:title>
+    <iirds:is-part-of-package rdf:resource="urn:uuid:aafef6e2-926a-46c7-acaa-9635d6f91cab/package"/>
+    <iirds:relates-to-qualification rdf:resource="urn:uuid:fa900cca-abb9-454c-a19b-7441d04f57af"/>
+    <iirds:has-rendition>
+      <iirds:Rendition rdf:about="urn:uuid:51a667df-920d-4667-8b94-1c9bc6ddba2d/rendition/9007210873545995.html">
+        <iirds:format>text/html</iirds:format>
+        <iirds:source>CONTENT/9007210873545995.html</iirds:source>
+      </iirds:Rendition>
+    </iirds:has-rendition>
+  </iirds:Topic>
+  <iirds:Topic rdf:about="topic/second-topic">
+    <iirds:title>Zweiter Topic</iirds:title>
+    <iirds:is-part-of-package rdf:resource="urn:uuid:aafef6e2-926a-46c7-acaa-9635d6f91cab/package"/>
+    <iirds:relates-to-qualification rdf:resource="urn:uuid:fa900cca-abb9-454c-a19b-7441d04f57af"/>
+    <iirds:has-rendition>
+      <iirds:Rendition rdf:about="urn:uuid:51a667df-920d-4667-8b94-1c9bc6ddba2d/rendition/9007210873545996.html">
+        <iirds:format>text/html</iirds:format>
+        <iirds:source>CONTENT/9007210873545996.html</iirds:source>
+      </iirds:Rendition>
+    </iirds:has-rendition>
+  </iirds:Topic>
+<iirds:Component rdf:about="http://myCompany.com/products/TableFan">
+  <iirds:has-external-classification>
+    <iirds:ExternalClassification>
+      <rdfs:label xml:lang="en">29-17-01-01 Fan (household)</rdfs:label>
+      <iirds:classificationIdentifier>0173-1#01-ACI075#015</iirds:classificationIdentifier>
+      <iirds:classificationIdentifier>0173-1#01-ACI075#016</iirds:classificationIdentifier>
+      <iirds:classificationVersion>13.0</iirds:classificationVersion>
+      <iirds:has-classification-domain rdf:resource="http://supco.com/model/eclassBasicIrdi"/>
+    </iirds:ExternalClassification>
+  </iirds:has-external-classification>
+</iirds:Component>
+
+<iirds:ClassificationDomain rdf:about="http://supco.com/model/eclassBasicIrdi">
+    <rdfs:label xml:lang="en">SupCo ECLASS BASIC Model IRDI</rdfs:label>
+    <iirds:has-classification-type rdf:resource="http://iirds.tekom.de/iirds#EclassIRDI"/>
+</iirds:ClassificationDomain>
+
+</rdf:RDF>
