@@ -2,10 +2,9 @@ const isBuiltIn = uri => uri.startsWith("http://iirds.tekom.de/iirds");
 
 const isExactlyOneChild = (el, selector) => el.querySelectorAll(`:scope > ${selector}`).length === 1;
 
-export const isDirectoryRoot = (el) => {
-    return el.querySelector(":scope > has-next-sibling")?.getAttribute("rdf:resource") === "http://iirds.tekom.de/iirds#nil" &&
-        el.querySelectorAll(":scope > has-first-child")?.length > 0 &&
-        el.querySelectorAll(":scope > has-directory-structure-type")?.length > 0;
+export const isDirectoryRoot = (els, dirRoot) => {
+    const id = dirRoot.getAttribute("rdf:about");
+    return !els.some(el => el.querySelector(":scope > has-first-child")?.getAttribute("rdf:resource") === id) && !els.some(el => el.querySelector(":scope > has-next-sibling")?.getAttribute("rdf:resource") === id);
 };
 export const getAbsoluteIRIRegExp = () => new RegExp(/^(\w+:|www\.)[\S]+/);
 

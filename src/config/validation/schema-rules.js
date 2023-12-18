@@ -854,8 +854,8 @@ export default [
     {
         id: "M24.5",
         path: "DirectoryNode",
-        assert: els => els.filter(el => isDirectoryRoot(el)).every(el => el.querySelector("has-directory-structure-type")),
-        getInvalid: els => els.filter(el => isDirectoryRoot(el) && !el.querySelector("has-directory-structure-type")),
+        assert: els => els.filter(el => isDirectoryRoot(els, el)).every(el => el.querySelector("has-directory-structure-type")),
+        getInvalid: els => els.filter(el => isDirectoryRoot(els, el) && !el.querySelector("has-directory-structure-type")),
         prio: "MUST",
         category: "only root element must have property",
         spec: "https://iirds.org/fileadmin/iiRDS_specification/20201103-1.1-release/index.html#information-units:~:text=Only%20root%20nodes%20of%20a%20directory%20structure%20MUST%20have%20the%20property%20iirds%3Ahas%2Ddirectory%2Dstructure%2Dtype.",
@@ -874,11 +874,11 @@ export default [
         path: "DirectoryNode",
         assert: (els) => {
             if (els.length > 0) {
-                return els.filter(el => isDirectoryRoot(el)).length > 0;
+                return els.filter(el => isDirectoryRoot(els, el)).length > 0;
             }
             return true;
         },
-        getInvalid: els => els.filter(el => !isDirectoryRoot(el)),
+        getInvalid: els => els.filter(el => !isDirectoryRoot(els, el)),
         prio: "MUST",
         category: "there must be at least one root directory node",
         spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#information-units:~:text=6.9.1-,Directory%20Nodes",
