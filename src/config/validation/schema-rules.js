@@ -10,7 +10,8 @@ import {
     isDirectoryRoot,
     isExactlyOne,
     isOneOrMore,
-    isZeroOrOne
+    isZeroOrOne,
+    mayHaveExternalClassification
 } from "@/util/rules";
 
 export default [
@@ -2037,6 +2038,114 @@ export default [
         testfiles: {
             "true": ["./tests/files/util/iirds-validation/metadata_iirds_sample_pass.rdf", "./tests/files/util/iirds-validation/min_requirements.rdf"],
             "false": ["./tests/files/util/iirds-validation/Example 34 - Component with manufacturer-M67_false.rdf"]
+        }
+    },
+    {
+        id: "M96.1",
+        path: "ExternalClassification",
+        assert: (els, doc) => isExactlyOne(els, doc, "has-classification-domain"),
+        getInvalid: (els, doc) => getMoreThanOne(els, doc, "has-classification-domain"),
+        prio: "MUST",
+        category: "cardinality 1",
+        spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#external-classification:~:text=An%20external%20classification%20MUST%20point%20to%20exactly%20one%20domain%20by%20the%20iirds%3Ahas%2Dclassification%2Ddomain%20property.%20The%20domain%20is%20an%20instance%20of%20the%20iirdsClassificationDomain%20class.",
+        version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
+        rule: {
+            "de": "Eine externe Klassifikation MUSS über die Eigenschaft iirds:has-classification-domain auf genau eine Klassifikationsdomäne verweisen.",
+            "en": "An external classification MUST point to exactly one classification domain by the iirds:has-classification-domain property."
+        },
+        testfiles: {
+            "true": ["./tests/files/util/iirds-validation/M96_true.rdf", "./tests/files/util/iirds-validation/min_requirements.rdf"],
+            "false": ["./tests/files/util/iirds-validation/M96-1_false.rdf"]
+        }
+    },
+    {
+        id: "M96.2",
+        path: "ExternalClassification",
+        assert: (els, doc) => isExactlyOne(els, doc, "classificationIdentifier"),
+        getInvalid: (els, doc) => getMoreThanOne(els, doc, "classificationIdentifier"),
+        prio: "MUST",
+        category: "cardinality 1",
+        spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#external-classification:~:text=6.8.4%20External%20Classification",
+        version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
+        rule: {
+            "de": "Eine externe Klassifikation MUSS genau einen Klassifikationsidentifikator haben.",
+            "en": "An external classification MUST have exactly one classification identifier."
+        },
+        testfiles: {
+            "true": ["./tests/files/util/iirds-validation/M96_true.rdf", "./tests/files/util/iirds-validation/min_requirements.rdf"],
+            "false": ["./tests/files/util/iirds-validation/M96-2_false.rdf"]
+        }
+    },
+    {
+        id: "M96.3",
+        path: "ExternalClassification",
+        assert: els => els.every(el => el.querySelector("classificationIdentifier").textContent !== ""),
+        getInvalid: els => els.filter(el => el.querySelector("classificationIdentifier").textContent === ""),
+        prio: "MUST",
+        category: "cardinality 1",
+        spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#external-classification:~:text=6.8.4%20External%20Classification",
+        version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
+        rule: {
+            "de": "Der Klassifizierungsbezeichner MUSS als nicht leere Zeichenfolge in der Eigenschaft iirds:classificationIdentifier angegeben werden.",
+            "en": "The classification identifier MUST be provided as a non-empty string in the iirds:classificationIdentifier property."
+        },
+        testfiles: {
+            "true": ["./tests/files/util/iirds-validation/M96_true.rdf", "./tests/files/util/iirds-validation/min_requirements.rdf"],
+            "false": ["./tests/files/util/iirds-validation/M96-3_false.rdf"]
+        }
+    },
+    {
+        id: "M96.4",
+        path: "has-external-classification",
+        assert: els => els.every(el => mayHaveExternalClassification(el)),
+        getInvalid: els => els.filter(el => !mayHaveExternalClassification(el)),
+        prio: "MAY",
+        category: "may have properties",
+        spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#external-classification:~:text=Instances%20of%20the%20classes%20iirds%3AProductVariant%2C%20iirds%3AProductFeature%2C%20iirds%3AComponent%2C%20and%20iirds%3AInformationUnit%20MAY%20have%20iirds%3Ahas%2Dexternal%2Dclassification%20relations%20to%20iirds%3AExternalClassification%20instances.",
+        version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
+        rule: {
+            "de": "Instanzen der Klassen iirds:ProductVariant, iirds:ProductFeature, iirds:Component und iirds:InformationUnit KÖNNEN iirds:has-external-classification-Beziehungen zu iirds:ExternalClassification-Instanzen haben.",
+            "en": "Instances of the classes iirds:ProductVariant, iirds:ProductFeature, iirds:Component and iirds:InformationUnit MAY have iirds:has-external-classification relations to iirds:ExternalClassification instances."
+        },
+        testfiles: {
+            "true": ["./tests/files/util/iirds-validation/M96_true.rdf", "./tests/files/util/iirds-validation/min_requirements.rdf"],
+            "false": ["./tests/files/util/iirds-validation/M96-4_false.rdf"]
+        }
+    },
+    {
+        id: "M97.1",
+        path: "ClassificationDomain",
+        assert: els => els.every(el => el.hasAttribute("rdf:about") && el.getAttribute("rdf:about") !== ""),
+        getInvalid: els => els.filter(el => !el.hasAttribute("rdf:about") || el.getAttribute("rdf:about") === ""),
+        prio: "REQUIRED",
+        category: "must have IRI",
+        spec: "",
+        version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
+        rule: {
+            "de": "IRI: ERFORDERLICH",
+            "en": "IRI: REQUIRED"
+        },
+        testFiles: {
+            "true": ["./tests/files/util/iirds-validation/M97_true.rdf", "./tests/files/util/iirds-validation/min_requirements.rdf"],
+            "false": ["./tests/files/util/iirds-validation/M97-1_false.rdf"]
+        }
+    },
+    {
+        id: "M97.2",
+        path: "ClassificationDomain",
+        assert: els => els.filter(el => el.hasAttribute("rdf:about")).filter(el => getAbsoluteIRIRegExp().test(el.getAttribute("rdf:about"))),
+        getInvalid: els => els.filter(el => el.hasAttribute("rdf:about")).filter(el => !getAbsoluteIRIRegExp().test(el.getAttribute("rdf:about"))),
+        prio: "MUST",
+        category: "absolute IRI",
+        spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#external-classification:~:text=Instances%20of%20class%20iirds%3AClassificationDomain%20MUST%20have%20an%20absolute%20IRI",
+        version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
+        rule: {
+            "de": "Instanzen der Klasse iirds:ClassificationDomain MÜSSEN einen absoluten IRI haben.",
+            "en": "Instances of class iirds:ClassificationDomain MUST have an absolute IRI."
+        },
+        testfiles: {
+            "true": ["./tests/files/util/iirds-validation/M97_true.rdf", "./tests/files/util/iirds-validation/min_requirements.rdf"],
+            "false": ["./tests/files/util/iirds-validation/M97-2_false.rdf"]
         }
     },
 ];
