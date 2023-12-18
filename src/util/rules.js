@@ -5,7 +5,7 @@ const isExactlyOneChild = (el, selector) => el.querySelectorAll(`:scope > ${sele
 export const isDirectoryRoot = (el) => {
     return !["has-next-sibling", "has-first-child", "DirectoryNode"].includes(el.parentElement.localName);
 };
-export const mayHaveExternalClassification = (el) => {
+export const mayHasExternalClassification = (el) => {
     return [
         "Component",
         "ProductVariant",

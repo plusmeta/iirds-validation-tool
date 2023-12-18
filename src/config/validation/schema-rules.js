@@ -11,7 +11,7 @@ import {
     isExactlyOne,
     isOneOrMore,
     isZeroOrOne,
-    mayHaveExternalClassification
+    mayHasExternalClassification
 } from "@/util/rules";
 
 export default [
@@ -2097,8 +2097,8 @@ export default [
     {
         id: "M96.4",
         path: "has-external-classification",
-        assert: els => els.every(el => mayHaveExternalClassification(el)),
-        getInvalid: els => els.filter(el => !mayHaveExternalClassification(el)),
+        assert: els => els.every(el => mayHasExternalClassification(el)),
+        getInvalid: els => els.filter(el => !mayHasExternalClassification(el)),
         prio: "MAY",
         category: "may have properties",
         spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#external-classification:~:text=Instances%20of%20the%20classes%20iirds%3AProductVariant%2C%20iirds%3AProductFeature%2C%20iirds%3AComponent%2C%20and%20iirds%3AInformationUnit%20MAY%20have%20iirds%3Ahas%2Dexternal%2Dclassification%20relations%20to%20iirds%3AExternalClassification%20instances.",
