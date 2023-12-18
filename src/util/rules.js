@@ -5,18 +5,6 @@ const isExactlyOneChild = (el, selector) => el.querySelectorAll(`:scope > ${sele
 export const isDirectoryRoot = (el) => {
     return !["has-next-sibling", "has-first-child", "DirectoryNode"].includes(el.parentElement.localName);
 };
-export const mayHaveExternalClassification = (el) => {
-    return [
-        "Component",
-        "ProductVariant",
-        "ProductFunction",
-        "ProductProperty",
-        "InformationPackage",
-        "Topic",
-        "Fragment",
-        "Document"
-    ].includes(el.parentElement.localName);
-};
 export const getAbsoluteIRIRegExp = () => new RegExp(/^(\w+:|www\.)[\S]+/);
 
 export const includesAll = (small, big) => small.every(n => big.indexOf(n) !== -1);
