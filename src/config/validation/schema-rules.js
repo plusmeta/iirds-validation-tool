@@ -10,7 +10,8 @@ import {
     isDirectoryRoot,
     isExactlyOne,
     isOneOrMore,
-    isZeroOrOne
+    isZeroOrOne,
+    mayHaveExternalClassification
 } from "@/util/rules";
 
 export default [
@@ -2091,6 +2092,24 @@ export default [
         testfiles: {
             "true": ["./tests/files/util/iirds-validation/M96_true.rdf", "./tests/files/util/iirds-validation/min_requirements.rdf"],
             "false": ["./tests/files/util/iirds-validation/M96-3_false.rdf"]
+        }
+    },
+    {
+        id: "M96.4",
+        path: "has-external-classification",
+        assert: els => els.every(el => mayHaveExternalClassification(el)),
+        getInvalid: els => els.filter(el => !mayHaveExternalClassification(el)),
+        prio: "MAY",
+        category: "may have properties",
+        spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#external-classification:~:text=Instances%20of%20the%20classes%20iirds%3AProductVariant%2C%20iirds%3AProductFeature%2C%20iirds%3AComponent%2C%20and%20iirds%3AInformationUnit%20MAY%20have%20iirds%3Ahas%2Dexternal%2Dclassification%20relations%20to%20iirds%3AExternalClassification%20instances.",
+        version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
+        rule: {
+            "de": "Instanzen der Klassen iirds:ProductVariant, iirds:ProductFeature, iirds:Component und iirds:InformationUnit KÖNNEN iirds:has-external-classification-Beziehungen zu iirds:ExternalClassification-Instanzen haben.",
+            "en": "Instances of the classes iirds:ProductVariant, iirds:ProductFeature, iirds:Component and iirds:InformationUnit MAY have iirds:has-external-classification relations to iirds:ExternalClassification instances."
+        },
+        testfiles: {
+            "true": ["./tests/files/util/iirds-validation/M96_true.rdf", "./tests/files/util/iirds-validation/min_requirements.rdf"],
+            "false": ["./tests/files/util/iirds-validation/M96-4_false.rdf"]
         }
     },
     {
