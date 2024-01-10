@@ -884,8 +884,8 @@ export default [
         spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#information-units:~:text=6.9.1-,Directory%20Nodes",
         version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
         rule: {
-            "de": "Es MUSS mindestens ein Wurzelknoten vorhanden sein, der die Elemente iirds:has-directory-structure-type, iirds:has-first-child und iirds:has-next-sibling hat.",
-            "en": "There MUST be at least one root node that has the elements iirds:has-directory-structure-type, iirds:has-first-child and iirds:has-next-sibling."
+            "de": "Es MUSS mindestens ein Wurzelknoten vorhanden sein, der die Elemente iirds:has-directory-structure-type, iirds:has-first-child und iirds:has-next-sibling hat und nicht selbst als iirds:next-sibling oder iirds:first-child referenziert wird.",
+            "en": "There MUST be at least one root node that has the elements iirds:has-directory-structure-type, iirds:has-first-child and iirds:has-next-sibling and is not itself referenced as iirds:next-sibling or iirds:first-child."
         },
         testfiles: {
             "true": ["./tests/files/util/iirds-validation/M24-6-2_true.rdf"],
