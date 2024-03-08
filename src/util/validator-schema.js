@@ -20,7 +20,10 @@ export default {
         const document = Parser.parseFromString(processedString, documentMimeType);
         const iiRDSVersion = document.querySelector("iiRDSVersion")?.textContent;
 
-        const scopedTests = validations.filter(v => v.assert).filter(v => !prio || v.prio === prio);
+        const scopedTests = validations
+            .filter(v => v.assert)
+            .filter(v => !prio || v.prio === prio)
+            .filter(v => v.version.includes("V" + iiRDSVersion));
         const checkedSchemaRules = scopedTests.length;
         for (let test of scopedTests) {
             const selection = Array.from(document.querySelectorAll(test.path));

@@ -479,7 +479,7 @@ export default [
         getInvalid: (els, doc) => getMoreThanOne(els, doc, "has-event-code"),
         prio: "MUST",
         spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#information-units:~:text=Instances%20of%20the%20iirds%3AEvent%20class%20MUST%20have%20the%20following%20properties%3A%20iirds%3AeventCode%20and%20iirds%3AeventType.",
-        version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
+        version: ["V1.0", "V1.0.1", "V1.1"],
         rule: {
             "de": "Instanzen der Klasse iirds:Event MÜSSEN die Eigenschaft iirds:eventCode haben",
             "en": "Instances of the iirds:Event class MUST have property iirds:eventCode"
@@ -488,11 +488,11 @@ export default [
     {
         id: "M16.2",
         path: "Event",
-        assert: els => els.filter(el => !el.querySelectorAll("has-event-code")),
-        getInvalid: els => els.filter(el => !el.querySelectorAll("has-event-code")),
+        assert: els => els.filter(el => !el.querySelectorAll("has-event-type")),
+        getInvalid: els => els.filter(el => !el.querySelectorAll("has-event-type")),
         prio: "MUST",
         spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#information-units:~:text=Instances%20of%20the%20iirds%3AEvent%20class%20MUST%20have%20the%20following%20properties%3A%20iirds%3AeventCode%20and%20iirds%3AeventType.",
-        version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
+        version: ["V1.0", "V1.0.1", "V1.1"],
         rule: {
             "de": "Instanzen der Klasse iirds:Event MÜSSEN die Eigenschaft iirds:eventType haben",
             "en": "Instances of the iirds:Event class MUST have property iirds:eventType"
