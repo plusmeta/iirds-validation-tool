@@ -4,8 +4,13 @@ const isExactlyOneChild = (el, selector) => el.querySelectorAll(`:scope > ${sele
 
 export const isDirectoryRoot = (els, dirRoot) => {
     const id = dirRoot.getAttribute("rdf:about");
-    return !els.some(el => el.querySelector(":scope > has-first-child")?.getAttribute("rdf:resource") === id) &&
-        !els.some(el => el.querySelector(":scope > has-next-sibling")?.getAttribute("rdf:resource") === id) &&
+    let hasRefChild = false;
+    let hasRefSibling = false;
+    if (id !== null) {
+        hasRefChild = els.some(el => el.querySelector(":scope > has-first-child")?.getAttribute("rdf:resource") === id);
+        hasRefSibling = els.some(el => el.querySelector(":scope > has-next-sibling")?.getAttribute("rdf:resource") === id);
+    }
+    return !hasRefChild && !hasRefSibling &&
         dirRoot.parentElement.localName !== "has-first-child" && dirRoot.parentElement.localName !== "has-next-sibling";
 };
 export const getAbsoluteIRIRegExp = () => new RegExp(/^(\w+:|www\.)[\S]+/);
