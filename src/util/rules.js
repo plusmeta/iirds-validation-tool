@@ -28,11 +28,28 @@ export const isExactlyOne = (els, doc, selector) => (els && els.length) ? els.ev
 export const isDefinedAsClass = (els, doc, className) => els.every((el) => {
     if (el.hasAttribute("rdf:resource")) {
         const resource = el.getAttribute("rdf:resource");
-        return isBuiltIn(resource) || doc.querySelector(`[*|about='${resource}']`)?.localName === className;
+        return isBuiltIn(resource) ||
+            doc.querySelector(`[*|about='${resource}']`)?.localName === className ||
+            isCustomDefined(resource, doc, className);
     } else {
         return doc.querySelector(className);
     }
 });
+
+export const isCustomDefined = (resource, doc, className) => {
+    const elem = doc.querySelector(`[*|about='${resource}']`);
+    if (!!elem) {
+        const customClassUri = elem.namespaceURI + elem.localName;
+        const customClassDef = doc.querySelector(`[*|about='${customClassUri}']`);
+        if (!!customClassDef) {
+            return customClassDef.querySelector(":scope > subClassOf")?.getAttribute("rdf:resource") === "http://iirds.tekom.de/iirds#" + className;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+};
 
 export const getMoreThanOne = (els, doc, selector) => els.filter((el) => {
     if (el.hasAttribute("rdf:about")) {
@@ -50,7 +67,9 @@ export const getNotIncluded = (small, big) => small.filter(n => big.indexOf(n) =
 export const getWrongClassInPackage = (els, doc, className) => els.filter((el) => {
     if (el.hasAttribute("rdf:resource")) {
         const resource = el.getAttribute("rdf:resource");
-        return !isBuiltIn(resource) && doc.querySelector(`[*|about='${el.getAttribute("rdf:resource")}']`)?.localName !== className;
+        return !isBuiltIn(resource) &&
+            doc.querySelector(`[*|about='${el.getAttribute("rdf:resource")}']`)?.localName !== className &&
+            !isCustomDefined(resource, doc, className);
     } else {
         return !doc.querySelector(`:scope > ${className}`);
     }

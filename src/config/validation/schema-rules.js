@@ -498,6 +498,19 @@ export default [
             "en": "Instances of the iirds:Event class MUST have property iirds:eventType"
         }
     },
+    {
+        id: "M16.3",
+        path: "relates-to-event",
+        assert: (els, doc) => isDefinedAsClass(els, doc, "Event"),
+        getInvalid: (els, doc) => getWrongClassInPackage(els, doc, "Event"),
+        prio: "MUST",
+        spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#adding-a-proprietary-class:~:text=7.3.2-,Adding%20a%20Proprietary%20Class,-Proprietary%20iiRDS%20extensions",
+        version: ["V1.0", "V1.0.1", "V1.1", "V1.2"],
+        rule: {
+            "de": "Eine Erweiterung von iirds:Event MUSS als Klasse definiert werden.",
+            "en": "An extension of iirds:Event MUST be defined as a class."
+        }
+    },
 
     {
         id: "M17",
