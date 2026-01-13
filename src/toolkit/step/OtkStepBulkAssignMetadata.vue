@@ -26,7 +26,7 @@
           </v-col>
           <v-col cols="auto">
             <h2>
-              {{ (isValid) ? `${$t('Otk.valid')} iiRDS ${getCurrentProjectRelationById('detectedVersion')}` : $t('Otk.notValid') }}
+              {{ getHeader }}
             </h2>
           </v-col>
           <v-spacer />
@@ -261,6 +261,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 import AssignMetadata from "@/toolkit/block/OtkAssignMetadataToObject";
+import {IdConst} from "@/util/const";
 
 export default {
     name: "OtkStepBulkAssignMetadata",
@@ -290,6 +291,16 @@ export default {
         },
         isValid() {
             return this.getViolations.length === 0;
+        },
+        getHeader() {
+            if (this.isValid) {
+                const iirdsVersion = this.getCurrentProjectRelationById("detectedVersion");
+                const detectedIirdsVariant = this.getCurrentProjectRelationById("detectedIirdsVariant");
+                const iirdsVariant = (detectedIirdsVariant === IdConst.IIRDS_VARIANT_UNRESTRICTED) ? "" : `/${detectedIirdsVariant}`;
+                return `${this.$t("Otk.valid")} iiRDS${iirdsVariant} ${iirdsVersion}`;
+            } else {
+                return this.$t("Otk.notValid");
+            }
         },
         getValidationSource() {
             const containers = this.getCurrentObjectsByType("iirds:Container");

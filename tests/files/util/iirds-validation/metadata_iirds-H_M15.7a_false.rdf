@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:iirds="http://iirds.tekom.de/iirds#" xmlns:iirdsMch="http://iirds.tekom.de/iirds/domain/machinery#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:iirdsHov="http://iirds.tekom.de/iirds/domain/handover#" xmlns:iirdsSft="http://iirds.tekom.de/iirds/domain/software#" xmlns:plus="https://data.plusmeta.de/metadata#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <!-- *** Invalid M15.7a test - Missing ObjectInstanceURI/ObjectTypeURI/SerialNumber Identity *** -->
+  <iirds:Package rdf:about="urn:uuid:ab822d3b-008a-44a7-9ccb-372dc716b23f/package">
+    <iirds:title>Package Title</iirds:title>
+    <iirds:iiRDSVersion>1.3</iirds:iiRDSVersion>
+    <iirds:formatRestriction>H</iirds:formatRestriction>
+    <iirds:relates-to-product-variant rdf:resource="urn:uuid:05beebcf-f660-474b-85a5-f0bfa154d5a1"/>
+    <iirds:relates-to-party rdf:resource="urn:uuid:e8e33b70-5e7d-4fc4-8f3e-8d4d1037264b"/>
+  </iirds:Package>
+  <vcard:organization rdf:about="http://www.plusmeta.de">
+    <vcard:organization-name>plusmeta</vcard:organization-name>
+  </vcard:organization>
+  <iirds:Party rdf:about="urn:uuid:cd919563-49bb-4108-bc20-0a059e424043">
+    <iirds:has-party-role rdf:resource="http://iirds.tekom.de/iirds#Manufacturer"/>
+    <iirds:relates-to-vcard rdf:resource="http://www.plusmeta.de"/>
+  </iirds:Party>
+  <iirds:Party rdf:about="urn:uuid:e8e33b70-5e7d-4fc4-8f3e-8d4d1037264b">
+    <iirds:has-party-role rdf:resource="http://iirds.tekom.de/iirds#Creator"/>
+    <iirds:relates-to-vcard rdf:resource="http://www.plusmeta.de"/>
+  </iirds:Party>
+  <iirds:Party rdf:about="urn:uuid:b8f1dd71-d246-47a2-9060-82671df829d4">
+    <iirds:has-party-role rdf:resource="http://iirds.tekom.de/iirds#Author"/>
+    <iirds:relates-to-vcard rdf:resource="http://www.plusmeta.de"/>
+  </iirds:Party>
+  <iirds:ProductVariant rdf:about="urn:uuid:05beebcf-f660-474b-85a5-f0bfa154d5a1">
+    <!-- Only has ProductType Identity, missing ObjectInstanceURI/ObjectTypeURI/SerialNumber -->
+    <iirds:has-identity rdf:resource="urn:uuid:3f828bd1-2b8f-4021-8665-3a5789df6ca3"/>
+  </iirds:ProductVariant>
+  <iirds:IdentityDomain rdf:about="urn:uuid:90ca36ca-67f9-4b45-998d-b8ebb928e86c">
+    <iirds:relates-to-party rdf:resource="urn:uuid:cd919563-49bb-4108-bc20-0a059e424043"/>
+    <iirds:has-identity-type rdf:resource="http://iirds.tekom.de/iirds#ProductType"/>
+  </iirds:IdentityDomain>
+  <iirds:Identity rdf:about="urn:uuid:3f828bd1-2b8f-4021-8665-3a5789df6ca3">
+    <iirds:identifier>T3H5</iirds:identifier>
+    <iirds:has-identity-domain rdf:resource="urn:uuid:90ca36ca-67f9-4b45-998d-b8ebb928e86c"/>
+  </iirds:Identity>
+  <iirds:Document rdf:about="urn:uuid:c83e8cd1-c694-40f1-9af2-3d9ab4719e0e">
+    <iirds:title>Test Document</iirds:title>
+    <iirds:is-version-of rdf:resource="urn:uuid:9b11f92d-54b4-48aa-9439-ed6e7f0abfc3"/>
+    <iirds:is-part-of-package rdf:resource="urn:uuid:ab822d3b-008a-44a7-9ccb-372dc716b23f/package"/>
+    <iirds:language>zh-CN</iirds:language>
+    <iirds:relates-to-product-variant rdf:resource="urn:uuid:05beebcf-f660-474b-85a5-f0bfa154d5a1"/>
+    <iirds:relates-to-party rdf:resource="urn:uuid:b8f1dd71-d246-47a2-9060-82671df829d4"/>
+    <iirds:has-document-type rdf:resource="http://iirds.tekom.de/iirds#AdministratorGuide"/>
+    <iirdsHov:has-document-category rdf:resource="http://iirds.tekom.de/iirds/domain/handover#GeneralSafety"/>
+    <iirds:has-rendition>
+      <iirds:Rendition rdf:about="urn:uuid:c83e8cd1-c694-40f1-9af2-3d9ab4719e0e/rendition/21.pdf">
+        <iirds:format>application/pdf</iirds:format>
+        <iirds:source>CONTENT/21.pdf</iirds:source>
+      </iirds:Rendition>
+    </iirds:has-rendition>
+  </iirds:Document>
+  <iirds:InformationObject rdf:about="urn:uuid:9b11f92d-54b4-48aa-9439-ed6e7f0abfc3">
+    <iirds:has-identity rdf:resource="urn:uuid:499149e6-475d-4a7b-975b-ea6085e1903f"/>
+  </iirds:InformationObject>
+  <iirds:IdentityDomain rdf:about="urn:uuid:7c6f35bb-b39c-48fc-9500-0dad5eb17a14">
+    <iirds:relates-to-party rdf:resource="urn:uuid:e8e33b70-5e7d-4fc4-8f3e-8d4d1037264b"/>
+  </iirds:IdentityDomain>
+  <iirds:Identity rdf:about="urn:uuid:499149e6-475d-4a7b-975b-ea6085e1903f">
+    <iirds:identifier>plusmeta</iirds:identifier>
+    <iirds:has-identity-domain rdf:resource="urn:uuid:7c6f35bb-b39c-48fc-9500-0dad5eb17a14"/>
+  </iirds:Identity>
+</rdf:RDF>
+

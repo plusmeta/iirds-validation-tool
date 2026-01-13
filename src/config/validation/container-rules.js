@@ -1,3 +1,6 @@
+import {IdConst, FileConst} from "@/util/const";
+import * as jsonld from "jsonld";
+
 const FORBIDDEN_CHARS_REGEXP = /[^,”*:<>\/\u007F\u0000-\u001F\u0080-\u009F\uE000-\uF8FF\P{Co}]+/u; // Unicode flag important
 const FORBIDDEN_FILES_ROOT_REGEXP = /^[^/\\]+\.([pP][dD][fF]|[jJ][pP][eE]?[gG]|[gG][iI][fF]|[pP][nN][gG]|[hH][tT][mM][lL]?|[cC][sS][sS]|[iI][iI][rR][dD][sS]|[jJ][sS])$/;
 const FORBIDDEN_FILES_META_REGEXP = /^META\-INF\/\w+\.([pP][dD][fF]|[jJ][pP][eE]?[gG]|[gG][iI][fF]|[pP][nN][gG]|[hH][tT][mM][lL]?|[cC][sS][sS]|[iI][iI][rR][dD][sS]|[jJ][sS])$/;
@@ -99,8 +102,8 @@ export default [{
 },
 {
     id: "C8",
-    assert: zip => zip.files["META-INF/metadata.rdf"],
-    getInvalid: zip => ["META-INF/metadata.rdf"],
+    assert: zip => zip.files[FileConst.METADATA_RDF],
+    getInvalid: zip => [FileConst.METADATA_RDF],
     prio: "MUST",
     spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=The%20META%2DINF%20directory%20MUST%20contain%20the%20file%20metadata.rdf%20containing%20all%20metadata%20in%20RDF%201.1%20XML%20syntax%20(see%20%5Brdf%2Dsyntax%2Dgrammar%5D).",
     break: true,
@@ -112,14 +115,14 @@ export default [{
 {
     id: "C9",
     assert: async (zip) => {
-        const metadataFile = zip.files["META-INF/metadata.rdf"];
+        const metadataFile = zip.files[FileConst.METADATA_RDF];
         if (metadataFile) {
-            const metadataFileBuffer = await zip.files["META-INF/metadata.rdf"].async("arraybuffer");
+            const metadataFileBuffer = await zip.files[FileConst.METADATA_RDF].async("arraybuffer");
             const metadataFileContent = new TextDecoder("utf-8", {ignoreBOM: false}).decode(metadataFileBuffer);
             return metadataFileContent && /<rdf:RDF/.test(metadataFileContent);
         } else return false;
     },
-    getInvalid: zip => ["META-INF/metadata.rdf"],
+    getInvalid: zip => [FileConst.METADATA_RDF],
     prio: "MUST",
     spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=The%20META%2DINF%20directory%20MUST%20contain%20the%20file%20metadata.rdf%20containing%20all%20metadata%20in%20RDF%201.1%20XML%20syntax%20(see%20%5Brdf%2Dsyntax%2Dgrammar%5D).",
     break: true,
@@ -141,15 +144,55 @@ export default [{
     }
 },
 {
-    id: "C11",
+    id: "C11.1",
     assert: zip => !Object.keys(zip.files).some(file => FORBIDDEN_FILES_ROOT_REGEXP.test(file)),
     getInvalid: zip => Object.keys(zip.files).filter(file => FORBIDDEN_FILES_ROOT_REGEXP.test(file)),
     prio: "MUST",
+    iirdsVariant: [IdConst.IIRDS_VARIANT_UNRESTRICTED, IdConst.IIRDS_VARIANT_A],
     spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=All%20other%20files%20(content%2C%20like%20PDF%2C%20HTML%2C%20media%2C%20Javascript%2C%20CSS%2C%20nested%20iiRDS%20packages)%20MUST%20be%20stored%20in%20arbitrary%20subdirectories%20below%20the%20root%20directory.",
     break: false,
     rule: {
         "de": "Alle anderen Dateien (Inhalte wie PDF, HTML, Medien, Javascript, CSS, verschachtelte iiRDS-Pakete) MÜSSEN in beliebigen Unterverzeichnissen unterhalb des Stammverzeichnisses gespeichert werden.",
         "en": "All other files (content, like PDF, HTML, media, Javascript, CSS, nested iiRDS packages) MUST be stored in arbitrary subdirectories below the root directory."
+    }
+},
+{
+    id: "C11.1H",
+    assert: zip => !Object.keys(zip.files).some((file) => {
+        if (file.toLowerCase() === "index.html") return false;
+        return FORBIDDEN_FILES_ROOT_REGEXP.test(file);
+    }),
+    getInvalid: zip => Object.keys(zip.files).some((file) => {
+        if (file.toLowerCase() === "index.html") return false;
+        return FORBIDDEN_FILES_ROOT_REGEXP.test(file);
+    }),
+    prio: "MUST",
+    iirdsVariant: [IdConst.IIRDS_VARIANT_H],
+    spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=All%20other%20files%20(content%2C%20like%20PDF%2C%20HTML%2C%20media%2C%20Javascript%2C%20CSS%2C%20nested%20iiRDS%20packages)%20MUST%20be%20stored%20in%20arbitrary%20subdirectories%20below%20the%20root%20directory.",
+    break: false,
+    rule: {
+        "de": "Alle anderen Dateien (Inhalte wie PDF, HTML, Medien, Javascript, CSS, verschachtelte iiRDS-Pakete) MÜSSEN in beliebigen Unterverzeichnissen unterhalb des Stammverzeichnisses gespeichert werden.",
+        "en": "All other files (content, like PDF, HTML, media, Javascript, CSS, nested iiRDS packages) MUST be stored in arbitrary subdirectories below the root directory."
+    }
+},
+{
+    id: "C11.2",
+    assert: async (zip) => {
+        const indexFile = zip.files["index.html"];
+        if (indexFile) {
+            const indexFileBuffer = await zip.files["index.html"].async("arraybuffer");
+            const indexFileContent = new TextDecoder("utf-8", {ignoreBOM: false}).decode(indexFileBuffer);
+            return indexFileContent && /<html/.test(indexFileContent);
+        } else return false;
+    },
+    getInvalid: zip => ["index.html"],
+    prio: "MUST",
+    iirdsVariant: [IdConst.IIRDS_VARIANT_H],
+    spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20251103-1.3-release/index.html#mandatory-content-list",
+    break: false,
+    rule: {
+        "de": "Ein iiRDS/H-Paket MUSS eine Inhaltsübersicht als HTML-Datei mit dem Namen index.html enthalten, die sich im Stammordner des iiRDS-Pakets befindet.",
+        "en": "An iiRDS/H package MUST contain a content list as HTML file named index.html, located inside the root folder of the iiRDS package."
     }
 },
 {
@@ -207,17 +250,17 @@ export default [{
     }
 },
 {
-    id: "C16",
+    id: "C16.1",
     assert: async (zip) => {
-        const metadataFile = zip.files["META-INF/metadata.rdf"];
+        const metadataFile = zip.files[FileConst.METADATA_RDF];
         if (metadataFile) {
-            const metadataFileBuffer = await zip.files["META-INF/metadata.rdf"].async("arraybuffer");
+            const metadataFileBuffer = await zip.files[FileConst.METADATA_RDF].async("arraybuffer");
             const metadataFileContent = new TextDecoder("utf-8", {ignoreBOM: false}).decode(metadataFileBuffer);
             const metadataFileDocument = Parser.parseFromString(metadataFileContent, "application/xml");
             return metadataFileDocument.firstElementChild.localName === "RDF";
         } else return false;
     },
-    getInvalid: zip => ["META-INF/metadata.rdf"],
+    getInvalid: zip => [FileConst.METADATA_RDF],
     prio: "MUST",
     spec: "https://iirds.org/fileadmin/iiRDS_specification/20231110-1.2-release/index.html#:~:text=The%20META%2DINF%20directory%20MUST%20contain%20the%20file%20metadata.rdf%20containing%20all%20metadata%20in%20RDF%201.1%20XML%20syntax%20(see%20%5Brdf%2Dsyntax%2Dgrammar%5D).",
     break: true,
@@ -225,4 +268,31 @@ export default [{
         "de": "Das META-INF-Verzeichnis MUSS die Datei metadata.rdf in RDF 1.1 XML-Syntax enthalten.  XML ist ungültig.",
         "en": "The META-INF directory MUST contain the file metadata.rdf in RDF 1.1 XML syntax. XML is invalid."
     }
-}];
+},
+{
+    id: "C16.2",
+    assert: async (zip) => {
+        const metadataFile = zip.files[FileConst.METADATA_JSONLD];
+        if (metadataFile) {
+            try {
+                const metadataFileBuffer = await zip.files[FileConst.METADATA_JSONLD].async("arraybuffer");
+                const metadataFileContent = new TextDecoder("utf-8", {ignoreBOM: false}).decode(metadataFileBuffer);
+                const jsonObject = JSON.parse(metadataFileContent);
+                await jsonld.toRDF(jsonObject, {format: "application/n-quads"});
+                return true;
+            } catch (error) {
+                return false;
+            }
+        } else return false;
+    },
+    getInvalid: zip => [FileConst.METADATA_JSONLD],
+    iirdsVariant: [ IdConst.IIRDS_VARIANT_H ],
+    prio: "MUST",
+    spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20251103-1.3-release/index.html#metadata-location-and-rdf-serializations",
+    break: false,
+    rule: {
+        "de": "Wenn Metadaten im JSON-LD 1.1-Syntax bereitgestellt werden, MUSS das META-INF-Verzeichnis die Datei metadata.jsonld enthalten. Die Datei metadata.jsonld ist in uneingeschränktem iiRDS optional, aber für iiRDS/H-Pakete obligatorisch.",
+        "en": "If metadata is provided in the JSON-LD 1.1 syntax, the META-INF directory MUST contain the file metadata.jsonld. The file metadata.jsonld is optional in unrestricted iiRDS, but mandatory for iiRDS/H packages."
+    }
+},
+];

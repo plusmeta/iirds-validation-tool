@@ -2,6 +2,7 @@ import validations from "@/config/validation/schema-rules";
 
 import { v4 as uuid } from "uuid";
 import formatXML from "xml-formatter";
+import {IdConst} from "@/util/const";
 
 const Serializer = new XMLSerializer();
 const Parser = new DOMParser();
@@ -18,12 +19,14 @@ export default {
         const documentString = new TextDecoder("utf-8", {ignoreBOM: false}).decode(documentBuffer);
         const { processedString, lineMap, lineArr } = this.preprocessDocumentString(documentString);
         const document = Parser.parseFromString(processedString, documentMimeType);
-        const iiRDSVersion = document.querySelector("iiRDSVersion")?.textContent;
+        const iirdsVersion = document.querySelector("iiRDSVersion")?.textContent;
+        const iirdsVariant = document.querySelector("formatRestriction")?.textContent || IdConst.IIRDS_VARIANT_UNRESTRICTED;
 
         const scopedTests = validations
             .filter(v => v.assert)
             .filter(v => !prio || v.prio === prio)
-            .filter(v => v.version.includes("V" + iiRDSVersion));
+            .filter(v => v.version.includes("V" + iirdsVersion))
+            .filter(v => !v.iirdsVariant || v.iirdsVariant.includes(iirdsVariant));
         const checkedSchemaRules = scopedTests.length;
         for (let test of scopedTests) {
             const selection = Array.from(document.querySelectorAll(test.path));
@@ -41,7 +44,7 @@ export default {
                 }
             }
         }
-        return { schemaViolations, checkedSchemaRules, iiRDSVersion };
+        return { schemaViolations, checkedSchemaRules, iirdsVersion, iirdsVariant };
     },
     preprocessDocumentString(documentString) {
         const lineArr = documentString.split("\n");

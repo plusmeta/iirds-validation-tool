@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:iirdsMch="http://iirds.tekom.de/iirds/domain/machinery#" xmlns:iirds="http://iirds.tekom.de/iirds#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:iirdsSft="http://iirds.tekom.de/iirds/domain/software#">
+ <iirds:Package rdf:about="urn:uuid:0ec79b45-73ed-4afe-99ac-658cc3a2c2df">
+  <iirds:iiRDSVersion>1.0</iirds:iiRDSVersion>
+  <iirds:formatRestriction>A</iirds:formatRestriction>
+ </iirds:Package>
+ <iirds:Document rdf:about="urn:uuid:9cea7846-5404-4d4f-bd89-975954534921">
+  <iirds:is-part-of-package rdf:resource="urn:uuid:0ec79b45-73ed-4afe-99ac-658cc3a2c2df"/>
+  <iirds:dateOfCreation rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2019-01-09T09:52:00+01:00</iirds:dateOfCreation>
+  <iirds:relates-to-component>
+   <iirds:Component rdf:about="https://www.i4icm.de/pifan#PIFan">
+    <rdfs:label>PI-Fan</rdfs:label>
+   </iirds:Component>
+  </iirds:relates-to-component>
+  <iirds:has-document-type rdf:resource="http://iirds.tekom.de/iirds#ThisIsNotAStandardizedDocumentType"/>
+  <iirds:relates-to-product-variant>
+   <iirds:ProductVariant rdf:about="https://www.i4icm.de/pifan#X5-DH2">
+    <rdfs:label>X5-DH2</rdfs:label>
+   </iirds:ProductVariant>
+  </iirds:relates-to-product-variant>
+  <iirds:has-document-type rdf:resource="http://iirds.tekom.de/iirds#RepairInstructions"/>
+  <iirds:has-content-lifecycle-status>
+   <iirds:ContentLifeCycleStatus>
+    <iirds:dateOfStatus rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2019-04-11T09:52:00+01:00</iirds:dateOfStatus>
+    <iirds:relates-to-party>
+     <iirds:Party rdf:about="urn:uuid:17057163-c9f2-4b21-8210-89a13e4c9192">
+      <iirds:relates-to-vcard>
+       <vcard:Individual>
+        <vcard:hasEmail rdf:resource="mailto:maxime@musterfrau.com"/>
+        <vcard:fn>Maxime Musterfrau</vcard:fn>
+       </vcard:Individual>
+      </iirds:relates-to-vcard>
+     </iirds:Party>
+    </iirds:relates-to-party>
+    <iirds:has-content-lifecycle-status-value rdf:resource="http://iirds.tekom.de/iirds#Approved"/>
+   </iirds:ContentLifeCycleStatus>
+  </iirds:has-content-lifecycle-status>
+  <iirds:rights>Content Copyright (c) 2015, PI-Fan Project
+        iiRDS Implementation Copyright (c) 2019, iiRDS Consortium
+
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+        THE SOFTWARE.</iirds:rights>
+  <iirds:has-document-type rdf:resource="http://iirds.tekom.de/iirds#MaintenanceInstructions"/>
+  <iirds:has-document-type rdf:resource="http://iirds.tekom.de/iirds#OperatingInstructions"/>
+ </iirds:Document>
+ <iirds:Topic rdf:about="urn:uuid:bb98ea5a-431a-43a7-a5d9-2876d7656a3b">
+  <iirds:is-applicable-for-document-type rdf:resource="http://iirds.tekom.de/iirds#MaintenanceInstructions"/>
+  <iirds:relates-to-product-variant rdf:resource="https://www.i4icm.de/pifan#X5-DH2"/>
+  <iirds:dateOfCreation rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2019-01-09T09:52:00+01:00</iirds:dateOfCreation>
+  <iirds:has-rendition>
+   <iirds:Rendition>
+    <iirds:format>application/xhtml+xml</iirds:format>
+    <iirds:source>content/2_ProductDescription/2_2_ForeseeableMisuse.xhtml</iirds:source>
+   </iirds:Rendition>
+  </iirds:has-rendition>
+  <iirds:is-applicable-for-document-type rdf:resource="http://iirds.tekom.de/iirds#QuickGuide"/>
+  <iirds:is-applicable-for-document-type rdf:resource="http://iirds.tekom.de/iirds#OperatingInstructions"/>
+  <iirds:title>Foreseeable misuse</iirds:title>
+  <iirds:has-subject rdf:resource="http://iirds.tekom.de/iirds#ForeseeableMisuse"/>
+  <iirds:has-content-lifecycle-status>
+   <iirds:ContentLifeCycleStatus>
+    <iirds:dateOfStatus rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2019-05-02T09:52:00+01:00</iirds:dateOfStatus>
+    <iirds:relates-to-party>
+     <iirds:Party rdf:about="urn:uuid:a0d194ed-b441-41db-947c-3f7874fcf9ad">
+      <iirds:relates-to-vcard>
+       <vcard:Individual>
+        <vcard:hasEmail rdf:resource="mailto:matz@musterknabe.com"/>
+        <vcard:fn>Matz Musterknabe</vcard:fn>
+       </vcard:Individual>
+      </iirds:relates-to-vcard>
+      <iirds:has-party-role rdf:resource="http://iirds.tekom.de/iirds#PerformedBy"/>
+     </iirds:Party>
+    </iirds:relates-to-party>
+    <iirds:has-content-lifecycle-status-value rdf:resource="http://iirds.tekom.de/iirds#Reviewed"/>
+   </iirds:ContentLifeCycleStatus>
+  </iirds:has-content-lifecycle-status>
+  <iirds:language>en</iirds:language>
+  <iirds:is-applicable-for-document-type rdf:resource="http://iirds.tekom.de/iirds#RepairInstructions"/>
+  <iirds:has-topic-type rdf:resource="http://iirds.tekom.de/iirds#GenericConcept"/>
+  <iirds:is-part-of-package rdf:resource="urn:uuid:0ec79b45-73ed-4afe-99ac-658cc3a2c2df"/>
+  <iirds:relates-to-qualification>
+   <iirds:Role rdf:about="https://www.i4icm.de/pifan#Operator">
+    <rdfs:label>Operator</rdfs:label>
+   </iirds:Role>
+  </iirds:relates-to-qualification>
+  <iirds:relates-to-component rdf:resource="https://www.i4icm.de/pifan#PIFan"/>
+  <iirds:rights>Content Copyright (c) 2015, PI-Fan Project
+        iiRDS Implementation Copyright (c) 2019, iiRDS Consortium
+
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+        THE SOFTWARE.</iirds:rights>
+ </iirds:Topic>
+</rdf:RDF>

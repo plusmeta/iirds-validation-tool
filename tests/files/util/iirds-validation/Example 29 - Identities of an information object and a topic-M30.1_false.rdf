@@ -1,6 +1,6 @@
 <!-- Example 29: Identities of an information object and a topic  -->
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:iirds="http://iirds.tekom.de/iirds#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#">
-	<iirds:IdentityDomain rdf:about="http://myCompany.com/cms1/modules"/>
+	<iirds:IdentityDomain rdf:about="myCompany.com"/>
 	<iirds:IdentityDomain rdf:about="http://myCompany.com/cms1/versions"/>
 	<iirds:IdentityDomain rdf:about="http://myCompany.com/cms1/pubs"/>
 	<iirds:InformationObject rdf:about="http://myCompany.com/informationobjects/io_1">
@@ -14,7 +14,6 @@
 	<iirds:Topic rdf:about="http://myCompany.com/versions/io_1/en/1">
 		<iirds:has-identity>
 			<iirds:Identity>
-				<iirds:identifier></iirds:identifier>
 				<iirds:has-identity-domain rdf:resource="http://myCompany.com/cms1/versions"/>
 			</iirds:Identity>
 		</iirds:has-identity>

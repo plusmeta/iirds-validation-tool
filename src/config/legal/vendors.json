@@ -7,6 +7,15 @@
     "path": "C:\\Work\\iirds-validation-tool\\node_modules\\@vue\\compiler-sfc\\node_modules\\@babel\\parser",
     "licenseFile": "node_modules\\@vue\\compiler-sfc\\node_modules\\@babel\\parser\\LICENSE"
   },
+  "@digitalbazaar/http-client@4.2.0": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/digitalbazaar/http-client",
+    "publisher": "Digital Bazaar, Inc.",
+    "email": "support@digitalbazaar.com",
+    "url": "https://digitalbazaar.com/",
+    "path": "C:\\Work\\iirds-validation-tool\\node_modules\\@digitalbazaar\\http-client",
+    "licenseFile": "node_modules\\@digitalbazaar\\http-client\\LICENSE"
+  },
   "@sentry/browser@6.19.7": {
     "licenses": "BSD-3-Clause",
     "repository": "https://github.com/getsentry/sentry-javascript",
@@ -67,6 +76,12 @@
     "publisher": "Matt Zabriskie",
     "path": "C:\\Work\\iirds-validation-tool\\node_modules\\axios",
     "licenseFile": "node_modules\\axios\\LICENSE"
+  },
+  "canonicalize@2.1.0": {
+    "licenses": "Apache-2.0",
+    "repository": "https://github.com/erdtman/canonicalize",
+    "path": "C:\\Work\\iirds-validation-tool\\node_modules\\canonicalize",
+    "licenseFile": "node_modules\\canonicalize\\LICENSE"
   },
   "codemirror@5.65.7": {
     "licenses": "MIT",
@@ -183,6 +198,15 @@
     "path": "C:\\Work\\iirds-validation-tool\\node_modules\\isarray",
     "licenseFile": "node_modules\\isarray\\README.md"
   },
+  "jsonld@9.0.0": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/digitalbazaar/jsonld.js",
+    "publisher": "Digital Bazaar, Inc.",
+    "email": "support@digitalbazaar.com",
+    "url": "https://digitalbazaar.com/",
+    "path": "C:\\Work\\iirds-validation-tool\\node_modules\\jsonld",
+    "licenseFile": "node_modules\\jsonld\\LICENSE"
+  },
   "jszip@3.10.1": {
     "licenses": "(MIT OR GPL-3.0-or-later)",
     "repository": "https://github.com/Stuk/jszip",
@@ -190,6 +214,15 @@
     "email": "stuart@stuartk.com",
     "path": "C:\\Work\\iirds-validation-tool\\node_modules\\jszip",
     "licenseFile": "node_modules\\jszip\\LICENSE.markdown"
+  },
+  "ky@1.14.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/sindresorhus/ky",
+    "publisher": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "https://sindresorhus.com",
+    "path": "C:\\Work\\iirds-validation-tool\\node_modules\\ky",
+    "licenseFile": "node_modules\\ky\\license"
   },
   "lie@3.1.1": {
     "licenses": "MIT",
@@ -217,6 +250,14 @@
     "email": "john.david.dalton@gmail.com",
     "path": "C:\\Work\\iirds-validation-tool\\node_modules\\lodash",
     "licenseFile": "node_modules\\lodash\\LICENSE"
+  },
+  "lru-cache@6.0.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/isaacs/node-lru-cache",
+    "publisher": "Isaac Z. Schlueter",
+    "email": "i@izs.me",
+    "path": "C:\\Work\\iirds-validation-tool\\node_modules\\lru-cache",
+    "licenseFile": "node_modules\\lru-cache\\LICENSE"
   },
   "marked@0.4.0": {
     "licenses": "MIT",
@@ -274,6 +315,15 @@
     "repository": "https://github.com/calvinmetcalf/process-nextick-args",
     "path": "C:\\Work\\iirds-validation-tool\\node_modules\\process-nextick-args",
     "licenseFile": "node_modules\\process-nextick-args\\license.md"
+  },
+  "rdf-canonize@5.0.0": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/digitalbazaar/rdf-canonize",
+    "publisher": "Digital Bazaar, Inc.",
+    "email": "support@digitalbazaar.com",
+    "url": "https://digitalbazaar.com/",
+    "path": "C:\\Work\\iirds-validation-tool\\node_modules\\rdf-canonize",
+    "licenseFile": "node_modules\\rdf-canonize\\LICENSE"
   },
   "readable-stream@2.3.7": {
     "licenses": "MIT",
@@ -364,6 +414,12 @@
     "email": "mathews.kyle@gmail.com",
     "path": "C:\\Work\\iirds-validation-tool\\node_modules\\typeface-ubuntu",
     "licenseFile": "node_modules\\typeface-ubuntu\\README.md"
+  },
+  "undici@6.23.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/nodejs/undici",
+    "path": "C:\\Work\\iirds-validation-tool\\node_modules\\undici",
+    "licenseFile": "node_modules\\undici\\LICENSE"
   },
   "util-deprecate@1.0.2": {
     "licenses": "MIT",
@@ -457,7 +513,7 @@
     "path": "C:\\Work\\iirds-validation-tool\\node_modules\\vue",
     "licenseFile": "node_modules\\vue\\LICENSE"
   },
-  "vuetify@2.4.11": {
+  "vuetify@2.6.12": {
     "licenses": "MIT",
     "repository": "https://github.com/vuetifyjs/vuetify",
     "publisher": "John Leider",
@@ -501,5 +557,14 @@
     "email": "chrisbottin@gmail.com",
     "path": "C:\\Work\\iirds-validation-tool\\node_modules\\xml-parser-xo",
     "licenseFile": "node_modules\\xml-parser-xo\\LICENSE"
+  },
+  "yallist@4.0.0": {
+    "licenses": "ISC",
+    "repository": "https://github.com/isaacs/yallist",
+    "publisher": "Isaac Z. Schlueter",
+    "email": "i@izs.me",
+    "url": "http://blog.izs.me/",
+    "path": "C:\\Work\\iirds-validation-tool\\node_modules\\yallist",
+    "licenseFile": "node_modules\\yallist\\LICENSE"
   }
 }

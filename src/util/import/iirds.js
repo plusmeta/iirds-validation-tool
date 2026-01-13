@@ -8,6 +8,7 @@ import containerValidation from "@/util/validator-container";
 import systemValidations from "@/config/validation/system-rules";
 
 import { ConfConst } from "@/config/imports/const";
+import {IdConst} from "@/util/const";
 
 const VERBOSE = process.env.NODE_ENV !== "production";
 const MAX_VIOLATIONS = 100;
@@ -29,6 +30,7 @@ export default {
         let processable = true;
         let totalRulesChecked = 0;
         let detectedVersion = "1.1";
+        let detectedIirdsVariant = IdConst.IIRDS_VARIANT_UNRESTRICTED;
 
         // Container validation based on ruleset
         const {containerViolations, zipArchive, checkedContainerRules} = await containerValidation.validate(objectData, null, objectFilename);
@@ -55,7 +57,7 @@ export default {
 
         if (processable) {
             // Schema validation based on ruleset
-            const {schemaViolations, checkedSchemaRules, iiRDSVersion} = await schemaValidation.validate(zipArchive, "MUST", "metadata.rdf");
+            const { schemaViolations, checkedSchemaRules, iirdsVersion, iirdsVariant } = await schemaValidation.validate(zipArchive, "MUST", "metadata.rdf");
             if (schemaViolations && Array.isArray(schemaViolations)) {
                 let schemaViolationObjectUuids = [];
 
@@ -72,12 +74,15 @@ export default {
                 await this.setViolation(objectUuid, systemValidations["S3"]);
             }
 
-            detectedVersion = iiRDSVersion;
+            detectedVersion = iirdsVersion;
+            detectedIirdsVariant = iirdsVariant;
             totalRulesChecked += checkedSchemaRules;
         }
 
-
-        let violationObjects = this.violationObjects;
+        let violationObjects = this.violationObjects.filter((obj) => {
+            const variants = obj?.meta[IdConst.PLUS_IIRDSVARIANT]?.value || [];
+            return variants.includes(detectedIirdsVariant);
+        });
         if (violationObjects.length > MAX_VIOLATIONS) {
             await this.params.store.dispatch("projects/updateCurrentProjectRelations", { maxViolationsExceeded: true });
             violationObjects = violationObjects.slice(0, MAX_VIOLATIONS);
@@ -87,6 +92,7 @@ export default {
 
         await this.params.store.dispatch("projects/updateCurrentProjectRelations", { totalRulesChecked });
         await this.params.store.dispatch("projects/updateCurrentProjectRelations", { detectedVersion });
+        await this.params.store.dispatch("projects/updateCurrentProjectRelations", { detectedIirdsVariant });
 
         await this.params.store.dispatch("projects/nextProjectStepLocal");
 
@@ -155,6 +161,10 @@ export default {
                 "plus:RuleType": objectTemplate.metadata({
                     uri: "plus:RuleType",
                     value: test.type,
+                }),
+                [IdConst.PLUS_IIRDSVARIANT]: objectTemplate.metadata({
+                    uri: IdConst.PLUS_IIRDSVARIANT,
+                    value: test.iirdsVariant,
                 })
 
             }

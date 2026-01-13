@@ -5,13 +5,7 @@
 		<rdfs:label xml:lang="en">Rotor</rdfs:label>
 		<iirds:relates-to-party>
 			<iirds:Party rdf:about="http://myCompany.com/products">
-				<iirds:relates-to-vcard>
-					<vcard:Organization rdf:about="http://myCompany.com/about">
-						<vcard:fn>My Company of Europe Ltd.</vcard:fn>
-						<vcard:organization-name>My Company</vcard:organization-name>
-						<vcard:organization-unit>Rotor Unit</vcard:organization-unit>
-					</vcard:Organization>
-				</iirds:relates-to-vcard>
+
 			</iirds:Party>
 		</iirds:relates-to-party>
 	</iirds:Component>
