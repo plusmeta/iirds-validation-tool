@@ -2,8 +2,8 @@
     "theme":{
         "dark": false,
         "logo": {
-            "dark": "/images/iiRDS_white.svg",
-            "light": "/images/iiRDS_darkgrey_bluedots.svg"
+            "dark": "/images/iiRDS_black_tekom.svg",
+            "light": "/images/iiRDS_black_tekom.svg"
         },
         "themes": {
             "dark": {
