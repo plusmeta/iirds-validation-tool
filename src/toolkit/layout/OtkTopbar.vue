@@ -16,7 +16,6 @@
         :src="getLogoForTheme('dark')"
         alt="Validation Tool"
         title="Validation Tool"
-        width="75px"
         height="25px"
         class="ml-6 mr-4 mt-2"
       >
