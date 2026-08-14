@@ -463,7 +463,7 @@ export default [
     {
         id: "M15.1",
         path: "Document",
-        assert: (els, doc) => isOneOrMore(els, doc,"has-document-type"),
+        assert: (els, doc) => isOneOrMore(els, doc, "has-document-type"),
         getInvalid: (els, doc) => getMissing(els, doc, "has-document-type"),
         prio: "MUST",
         category: "cardinality 1..n",
