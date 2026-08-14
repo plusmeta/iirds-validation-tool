@@ -463,8 +463,8 @@ export default [
     {
         id: "M15.1",
         path: "Document",
-        assert: els => isOneOrMore(els, "has-document-type"),
-        getInvalid: els => getMissing(els, "has-document-type"),
+        assert: (els, doc) => isOneOrMore(els, doc,"has-document-type"),
+        getInvalid: (els, doc) => getMissing(els, doc, "has-document-type"),
         prio: "MUST",
         category: "cardinality 1..n",
         spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20251103-1.3-release/index.html#information-units:~:text=Instances%20of%20the%20iirds%3ADocument%20class%20MUST%20have%20one%20or%20more%20relations%20to%20one%20of%20the%20standardized%20iirds%3ADocumentTypes%20defined%20in%20iirds%3AInformationType%20%3E%20iirds%3ADocumentType.",
