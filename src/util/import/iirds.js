@@ -57,7 +57,7 @@ export default {
 
         if (processable) {
             // Schema validation based on ruleset
-            const { schemaViolations, checkedSchemaRules, iirdsVersion, iirdsVariant } = await schemaValidation.validate(zipArchive, "MUST", "metadata.rdf");
+            const { schemaViolations, checkedSchemaRules, iirdsVersion, iirdsVariant } = await schemaValidation.validate(zipArchive, ["MUST NOT", "MUST"], "metadata.rdf");
             if (schemaViolations && Array.isArray(schemaViolations)) {
                 let schemaViolationObjectUuids = [];
 

@@ -24,23 +24,24 @@ export default {
 
         const scopedTests = validations
             .filter(v => v.assert)
-            .filter(v => !prio || v.prio === prio)
+            .filter(v => !prio || prio.includes(v.prio))
             .filter(v => v.version.includes("V" + iirdsVersion))
             .filter(v => !v.iirdsVariant || v.iirdsVariant.includes(iirdsVariant));
         const checkedSchemaRules = scopedTests.length;
         for (let test of scopedTests) {
             const selection = Array.from(document.querySelectorAll(test.path));
             const pass = test.assert(selection, document);
+            const testPrio = test.prio;
             if (!pass) {
                 const result = (test.getInvalid) ? test.getInvalid(selection, document) : [];
                 if (result.length) {
                     for (let element of result) {
                         const { location, lineNr, lines } = this.getLocation(element, lineMap, lineArr);
                         const elems = this.cleanUpXML(formatXML(element.outerHTML));
-                        schemaViolations.push({ ...test, fileName, type, prio, location, lineNr, lines, elems });
+                        schemaViolations.push({ ...test, fileName, type, testPrio, location, lineNr, lines, elems });
                     }
                 } else {
-                    schemaViolations.push({ ...test, fileName, type, prio });
+                    schemaViolations.push({ ...test, fileName, type, testPrio });
                 }
             }
         }
