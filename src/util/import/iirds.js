@@ -57,7 +57,7 @@ export default {
 
         if (processable) {
             // Schema validation based on ruleset
-            const { schemaViolations, checkedSchemaRules, iirdsVersion, iirdsVariant } = await schemaValidation.validate(zipArchive, "MUST", "metadata.rdf");
+            const { schemaViolations, checkedSchemaRules, iirdsVersion, iirdsVariant } = await schemaValidation.validate(zipArchive, ["MUST NOT", "MUST"], "metadata.rdf");
             if (schemaViolations && Array.isArray(schemaViolations)) {
                 let schemaViolationObjectUuids = [];
 
@@ -80,8 +80,8 @@ export default {
         }
 
         let violationObjects = this.violationObjects.filter((obj) => {
-            const variants = obj?.meta[IdConst.PLUS_IIRDSVARIANT]?.value || [];
-            return variants.includes(detectedIirdsVariant);
+            const variants = obj?.meta[IdConst.PLUS_IIRDSVARIANT]?.value;
+            return !variants || variants.includes(detectedIirdsVariant);
         });
         if (violationObjects.length > MAX_VIOLATIONS) {
             await this.params.store.dispatch("projects/updateCurrentProjectRelations", { maxViolationsExceeded: true });
