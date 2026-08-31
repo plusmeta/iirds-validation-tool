@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!-- Proprietary iiRDS extensions per spec section 7.3: MUST NOT contain the iiRDS schema or
+     iiRDS domain extensions, but MAY define classes/properties in the defining party's own
+     namespace that reference iiRDS classes (e.g. as subclasses). -->
+<rdf:RDF xml:lang="de" xmlns:iirds="http://iirds.tekom.de/iirds#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:dcterms="http://purl.org/dc/terms/">
+    <!-- Example: Adding a proprietary subclass to an iiRDS class -->
+    <rdfs:Class rdf:about="http://myCompany.com/myProject#Error">
+        <rdfs:label xml:lang="en">Error</rdfs:label>
+        <rdfs:label xml:lang="de">Fehler</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://iirds.tekom.de/iirds#Event"/>
+    </rdfs:Class>
+    <!-- Example: External product ontology using an anonymous (blank-node) rdfs:Class -->
+    <owl:ObjectProperty rdf:about="http://purl.org/dc/terms/hasPart">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    </owl:ObjectProperty>
+    <rdfs:Class rdf:about="http://myCompany.com/iirds/externalProductWorld#EspressoMachine">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/dc/terms/hasPart"/>
+                <owl:allValuesFrom>
+                    <rdfs:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Class rdf:about="http://myCompany.com/iirds/externalProductWorld#Portafilter"/>
+                            <owl:Class rdf:about="http://myCompany.com/iirds/externalProductWorld#Grouphead"/>
+                        </owl:unionOf>
+                    </rdfs:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </rdfs:Class>
+</rdf:RDF>

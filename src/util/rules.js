@@ -2,6 +2,20 @@ import {IdConst} from "@/util/const";
 
 const isBuiltIn = uri => uri.startsWith("http://iirds.tekom.de/iirds");
 
+// A Class/Property element is a redefinition of the iiRDS schema (or a domain extension) only if
+// the resource it defines (its own rdf:about, or that of the closest typed-node ancestor) lives in
+// the iiRDS namespace. Proprietary extensions (rdf:about in the defining party's own namespace) that
+// merely reference iiRDS resources via subClassOf/domain/range/... are explicitly allowed by the spec
+// (see "Adding a Proprietary Class").
+export const getSchemaDefinitions = els => els.filter((el) => {
+    let node = el;
+    while (node && !node.hasAttribute("rdf:about")) {
+        node = node.parentElement;
+    }
+    const uri = node?.getAttribute("rdf:about");
+    return !!uri && isBuiltIn(uri);
+});
+
 const isExactlyOneChild = (el, selector) => el.querySelectorAll(`:scope > ${selector}`).length === 1;
 
 export const isDirectoryRoot = (els, dirRoot) => {
