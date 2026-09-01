@@ -4,6 +4,7 @@ import {
     getMissing,
     getMoreThanOne,
     getNotIncluded,
+    getSchemaDefinitions,
     getWrongClassInPackage,
     includesAll,
     isDefinedAsClass,
@@ -1377,9 +1378,9 @@ export default [
     },
     {
         id: "M30",
-        path: "Class, Property, subPropertyOf, subClassOf, domain, range, domainIncludes, rangeIncludes",
-        assert: els => els.length === 0,
-        getInvalid: els => els,
+        path: "Class, Property",
+        assert: els => getSchemaDefinitions(els).length === 0,
+        getInvalid: els => getSchemaDefinitions(els),
         prio: "MUST NOT",
         spec: "https://www.iirds.org/fileadmin/iiRDS_specification/20251103-1.3-release/index.html#information-units:~:text=The%20file%20metadata.rdf%20MUST%20NOT%20contain%20the%20iiRDS%20schema%20or%20iiRDS%20domain%20extensions.",
         version: ["V1.0", "V1.0.1", "V1.1", "V1.2", "V1.3"],
@@ -1388,8 +1389,8 @@ export default [
             "en": "The file metadata.rdf MUST NOT contain the iiRDS schema or iiRDS domain extensions."
         },
         testFiles: {
-            "true": [],
-            "false": []
+            "true": ["./tests/files/util/iirds-validation/M30_true.rdf", "./tests/files/util/iirds-validation/min_requirements.rdf"],
+            "false": ["./tests/files/util/iirds-validation/M30_false.rdf"]
         }
     },
     {

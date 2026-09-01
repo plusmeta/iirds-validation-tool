@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- metadata.rdf MUST NOT contain the iiRDS schema or iiRDS domain extensions: this file
+     (illegally) redefines the iiRDS class iirds:Event and the domain extension property
+     iirdsMch:has-part instead of only referencing them. -->
+<rdf:RDF xml:lang="de" xmlns:iirds="http://iirds.tekom.de/iirds#"
+  xmlns:iirdsMch="http://iirds.tekom.de/iirds/domain/machinery#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <rdfs:Class rdf:about="http://iirds.tekom.de/iirds#Event">
+        <rdfs:label xml:lang="en">Event</rdfs:label>
+    </rdfs:Class>
+    <rdf:Property rdf:about="http://iirds.tekom.de/iirds/domain/machinery#has-part">
+        <rdfs:label xml:lang="en">has part</rdfs:label>
+        <rdfs:domain rdf:resource="http://iirds.tekom.de/iirds#Component"/>
+    </rdf:Property>
+</rdf:RDF>
